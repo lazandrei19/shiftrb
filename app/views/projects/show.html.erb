@@ -4,7 +4,37 @@
   <strong>Name:</strong>
   <%= @project.name %>
 </p>
+<div>
+<p>
+  <strong>Headline:</strong>
+  <%= @project.headline %>
+</p>
+<strong>Tags:</strong>
+<ul>
+  <% @project.tags.each do |t| %>
+    <li><%= link_to t, tag_path(t) %></li>
+  <% end %>
+</ul>
+<strong>Description:</strong>
 <%= renderer.render(@project.description).html_safe %>
+</div>
+
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+
+<%= simple_form_for [@project, Feedback.new] do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :content, label: "Give feedback" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Submit" %>
+  </div>
+<% end %>
+
+<p><%= @project.feedbacks.count %> people have given feedback so far</p>
+
+<%= render @project.feedbacks %>
