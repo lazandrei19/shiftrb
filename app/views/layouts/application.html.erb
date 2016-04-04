@@ -6,7 +6,14 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="container">
+<% if user_signed_in? %>
+  <%= link_to "Sign out", destroy_user_session_path %>
+<% else %>
+  <%= link_to "Sign in with LinkedIn", user_omniauth_authorize_path(:linkedin) %>
+<% end %>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
 <%= yield %>
 
