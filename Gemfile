@@ -22,8 +22,18 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # Used to parse markdown
 gem 'redcarpet', '~> 3.3', '>= 3.3.4'
-# Used for non-sequential ids
-gem 'obfuscate_id'
+# Used to tag comapnies and people
+gem 'acts-as-taggable-on'
+# Used to see upvotes on feedback
+gem 'acts_as_votable', '~> 0.10.0'
+# Used for better forms
+gem 'simple_form'
+# Include Bootstrap
+gem 'bootstrap-sass', '~> 3.3.6'
+#Used for auth with LinkedIn
+gem 'devise', '~> 3.5', '>= 3.5.6'
+gem 'omniauth', '~> 1.3', '>= 1.3.1'
+gem 'omniauth-linkedin-oauth2'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
