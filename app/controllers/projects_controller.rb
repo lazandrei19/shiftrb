@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
   def show
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(escape_html: true), autolink: true, tables: true)
     locals renderer: markdown
+    @feedback = Feedback.new
   end
 
   # GET /projects/new
@@ -71,6 +72,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description)
+      params.require(:project).permit(:name, :headline,:description, :tag_list)
     end
 end
