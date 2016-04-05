@@ -264,5 +264,5 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   # Configuring Omniauth
-  config.omniauth :linkedin, "77jbkngl2499j4", "3nsInGjTIpVODEPn", :scope => 'r_fullprofile r_emailaddress r_network', :fields => ['id', 'email-address', 'first-name', 'last-name', 'headline', 'picture-urls::(original)', 'public-profile-url', 'api-standard-profile-request', 'three-past-positions']
+  config.omniauth :linkedin, "77jbkngl2499j4", "3nsInGjTIpVODEPn", :scope => 'r_emailaddress r_network', :fields => ['id', 'email-address', 'first-name', 'last-name', 'headline', 'picture-urls::(original)', 'public-profile-url', 'api-standard-profile-request', 'three-past-positions']
 end
