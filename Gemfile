@@ -33,7 +33,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 #Used for auth with LinkedIn
 gem 'devise', '~> 3.5', '>= 3.5.6'
 gem 'omniauth', '~> 1.3', '>= 1.3.1'
-gem 'omniauth-linkedin-oauth2'
+gem 'omniauth-linkedin'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
