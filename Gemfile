@@ -30,10 +30,8 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'simple_form'
 # Include Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
-#Used for auth with LinkedIn
+#Used for auth
 gem 'devise', '~> 3.5', '>= 3.5.6'
-gem 'omniauth', '~> 1.3', '>= 1.3.1'
-gem 'omniauth-linkedin'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
