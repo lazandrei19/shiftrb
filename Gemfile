@@ -30,8 +30,12 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'simple_form'
 # Include Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
-#Used for auth
+# Used for auth
 gem 'devise', '~> 3.5', '>= 3.5.6'
+# Used for uploading images to projects/profile photos
+gem 'paperclip', '~> 4.3', '>= 4.3.6'
+# Used for multiple images
+gem 'cocoon', '~> 1.2', '>= 1.2.9'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
