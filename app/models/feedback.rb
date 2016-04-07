@@ -3,6 +3,7 @@ class Feedback < ActiveRecord::Base
   validates_uniqueness_of :hashed_id
 
   belongs_to :project
+  belongs_to :user
 
   acts_as_votable
 

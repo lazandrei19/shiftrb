@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   after_create :generate_hashed_id
   validates_uniqueness_of :hashed_id
 
+  belongs_to :user
   acts_as_taggable_on :tags
   has_many :feedbacks, dependent: :destroy
 

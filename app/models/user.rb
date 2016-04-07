@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   acts_as_taggable_on :skills, :experience
+  has_many :projects, dependent: :destroy
+  has_many :feedbacks, dependent: :destroy
 end

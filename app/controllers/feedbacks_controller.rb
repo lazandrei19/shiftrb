@@ -1,11 +1,14 @@
 class FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorized_user, only: [:edit, :update, :destroy]
 
   # POST /feedbacks
   # POST /feedbacks.json
   def create
     @project = Project.find_by_hashed_id(params[:project_id])
     @feedback = @project.feedbacks.new(feedback_params)
+    @feedback.user = current_user
 
     respond_to do |format|
       if @feedback.save
@@ -35,6 +38,12 @@ class FeedbacksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_feedback
       @feedback = Feedback.find_by_hashed_id(params[:id])
+    end
+
+    # Check if the user has permissions to destroy/delete the entry
+    def authorized_user
+      @feedback = current_user.feedbacks.find_by_hashed_id(params[:id])
+      redirect_to feedbacks_path, notice: "Not authorized to edit this feedback" if @feedback.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
