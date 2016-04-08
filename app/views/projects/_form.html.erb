@@ -9,11 +9,19 @@
     </ul>
   </div>
 <% end %>
-<%= simple_form_for(@project, html: { class: 'form-horizontal'}) do |f| %>
+<%= simple_form_for(@project, html: { class: 'form-horizontal', multipart: true }) do |f| %>
 
   <%= f.input :name %>
+  <%= f.input :logo %>
   <%= f.input :headline %>
   <%= f.input :tag_list %>
   <%= f.input :description %>
+  <h3>Images</h3>
+  <%= f.simple_fields_for :images do |image| %>
+    <%= render 'image_fields', f: image %>
+  <% end %>
+  <div class="aa">
+    <%= link_to_add_association 'add image', f, :images %>
+  </div>
   <%= f.button :submit %>
 <% end %>

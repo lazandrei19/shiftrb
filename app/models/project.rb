@@ -5,8 +5,15 @@ class Project < ActiveRecord::Base
   validates_uniqueness_of :hashed_id
 
   belongs_to :user
-  acts_as_taggable_on :tags
   has_many :feedbacks, dependent: :destroy
+  has_many :images, dependent: :destroy
+  
+  acts_as_taggable_on :tags
+
+  has_attached_file :logo, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
+
+  accepts_nested_attributes_for :images, reject_if: proc { |attributes| attributes['image'].blank? }, allow_destroy: true
 
   def to_param
     self.hashed_id

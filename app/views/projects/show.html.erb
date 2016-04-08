@@ -3,6 +3,7 @@
 <p>
   <strong>Name:</strong>
   <%= @project.name %>
+  <%= image_tag(@project.logo.url(:medium)) %>
 </p>
 <p>
   <strong>by:</strong>
@@ -23,6 +24,12 @@
 <%= renderer.render(@project.description).html_safe %>
 </div>
 
+<strong>Images:</strong>
+<ul>
+  <% @project.images.each do |i| %>
+    <li><%= image_tag(i.image.url(:original)) %></li>
+  <% end %>
+</ul>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
