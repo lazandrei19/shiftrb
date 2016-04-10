@@ -8,10 +8,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up)        << :name
-    devise_parameter_sanitizer.for(:sign_up)        << :avatar
-    devise_parameter_sanitizer.for(:account_update) << :name
-    devise_parameter_sanitizer.for(:account_update) << :avatar
+    [:sign_up, :account_update].each do |action|
+      [:name, :avatar, :skills, :experience].each do |field|
+        devise_parameter_sanitizer.for(action) << field
+      end
+    end
   end
 
   private
