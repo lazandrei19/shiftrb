@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409181254) do
+ActiveRecord::Schema.define(version: 20160411182404) do
 
   create_table "feedbacks", force: :cascade do |t|
     t.text     "content"
@@ -122,6 +122,9 @@ ActiveRecord::Schema.define(version: 20160409181254) do
     t.boolean  "current"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  add_index "workplaces", ["user_id"], name: "index_workplaces_on_user_id"
 
 end

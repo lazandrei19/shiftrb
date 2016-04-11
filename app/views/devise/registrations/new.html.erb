@@ -8,8 +8,15 @@
     <%= f.input :name, required: true %>
     <%= f.input :avatar, required: true %>
     <%= f.input :skill_list %>
+    <%= f.input :experience_list %>
     <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
     <%= f.input :password_confirmation, required: true %>
+    <%= f.simple_fields_for :workplaces do |workplace| %>
+      <%= render 'workplace_fields', f: workplace %>
+    <% end %>
+    <div>
+      <%= link_to_add_association 'add workplace', f, :workplaces %>
+    </div>
   </div>
 
   <div class="form-actions">

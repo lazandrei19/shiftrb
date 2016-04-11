@@ -11,4 +11,6 @@ class User < ActiveRecord::Base
   has_many :projects, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
   has_many :workplaces, dependent: :destroy
+  
+  accepts_nested_attributes_for :workplaces, reject_if: proc { |attributes| attributes['company'].blank? }, allow_destroy: true
 end

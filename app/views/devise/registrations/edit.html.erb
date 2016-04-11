@@ -13,6 +13,13 @@
     <%= f.input :skill_list, input_html: {value: current_user.skill_list.to_s} %>
     <%= f.input :experience_list, input_html: {value: current_user.experience_list.to_s} %>
 
+    <%= f.simple_fields_for :workplaces do |workplace| %>
+      <%= render 'workplace_fields', f: workplace %>
+    <% end %>
+    <div>
+      <%= link_to_add_association 'add workplace', f, :workplaces %>
+    </div>
+
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
