@@ -8,10 +8,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    [:sign_up, :account_update].each do |action|
-      [:name, :avatar, :skills, :experience].each do |field|
-        devise_parameter_sanitizer.for(action) << field
-      end
+    devise_parameter_sanitizer.for(:sign_up) do |u| 
+      u.permit(:email, :password, :password_confirmation, :name, :avatar, :skill_list, :experience_list)
+    end
+    devise_parameter_sanitizer.for(:account_update) do |u| 
+      u.permit(:email, :password, :password_confirmation, :current_password, :name, :avatar, :skill_list , :experience_list)
     end
   end
 

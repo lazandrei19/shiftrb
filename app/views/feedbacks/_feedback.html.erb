@@ -1,4 +1,4 @@
-<div class="col-xs-12">
-  <h4><%= feedback.user.name %></h4>
+<div class="col-xs-12 feedback">
+  <h4><%= image_tag(feedback.user.avatar.url(:thumb)) %><%= feedback.user.name %></h4>
   <%= feedback.content %>
 </div>

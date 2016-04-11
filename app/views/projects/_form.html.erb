@@ -14,13 +14,13 @@
   <%= f.input :name %>
   <%= f.input :logo %>
   <%= f.input :headline %>
-  <%= f.input :tag_list %>
+  <%= f.input :tag_list, input_html: {value: @project.tag_list.to_s} %>
   <%= f.input :description %>
   <h3>Images</h3>
   <%= f.simple_fields_for :images do |image| %>
     <%= render 'image_fields', f: image %>
   <% end %>
-  <div class="aa">
+  <div>
     <%= link_to_add_association 'add image', f, :images %>
   </div>
   <%= f.button :submit %>

@@ -14,7 +14,6 @@ class ProjectsController < ApplicationController
   def show
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(escape_html: true), autolink: true, tables: true)
     locals renderer: markdown
-    @feedback = Feedback.new
   end
 
   # GET /projects/new

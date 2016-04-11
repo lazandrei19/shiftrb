@@ -8,7 +8,10 @@
 
     <%= f.input :name, required: true%>
 
-    <%= f.input :avatar, required: true%>
+    <%= f.input :avatar%>
+    
+    <%= f.input :skill_list, input_html: {value: current_user.skill_list.to_s} %>
+    <%= f.input :experience_list, input_html: {value: current_user.experience_list.to_s} %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
