@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :like]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :authorized_user, only: [:edit, :update, :destroy]
 
@@ -7,6 +7,15 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
+  end
+
+  def like
+    if current_user.voted_for? @project
+      @project.unliked_by current_user
+    else
+      @project.liked_by current_user
+    end
+    redirect_to :back
   end
 
   # GET /projects/1

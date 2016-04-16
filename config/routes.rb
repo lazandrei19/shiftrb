@@ -9,6 +9,9 @@ Rails.application.routes.draw do
         put "like", to: "feedbacks#like"
       end
     end
+    member do
+      put "like", to: "projects#like"
+    end
   end
   resources :tags, only: [:index, :show]
   devise_for :users
