@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416091814) do
+ActiveRecord::Schema.define(version: 20160416103339) do
 
   create_table "feedbacks", force: :cascade do |t|
+    t.string   "hashed_id"
     t.text     "content"
+    t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "hashed_id"
-    t.integer  "project_id"
     t.integer  "user_id"
   end
 
@@ -38,19 +38,20 @@ ActiveRecord::Schema.define(version: 20160416091814) do
   add_index "images", ["project_id"], name: "index_images_on_project_id"
 
   create_table "projects", force: :cascade do |t|
+    t.string   "hashed_id"
     t.string   "name"
+    t.string   "headline"
     t.text     "description"
+    t.integer  "user_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.string   "hashed_id"
-    t.string   "headline"
-    t.integer  "user_id"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
   end
 
+  add_index "projects", ["hashed_id"], name: "index_projects_on_hashed_id"
   add_index "projects", ["user_id"], name: "index_projects_on_user_id"
 
   create_table "taggings", force: :cascade do |t|
@@ -86,16 +87,16 @@ ActiveRecord::Schema.define(version: 20160416091814) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "provider"
-    t.string   "uid"
     t.string   "name"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "hashed_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["hashed_id"], name: "index_users_on_hashed_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "votes", force: :cascade do |t|
@@ -116,12 +117,10 @@ ActiveRecord::Schema.define(version: 20160416091814) do
   create_table "workplaces", force: :cascade do |t|
     t.string   "company"
     t.string   "position"
-    t.integer  "startYear"
-    t.integer  "endYear"
-    t.boolean  "current"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "emoji",      limit: 1
     t.integer  "user_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "workplaces", ["user_id"], name: "index_workplaces_on_user_id"

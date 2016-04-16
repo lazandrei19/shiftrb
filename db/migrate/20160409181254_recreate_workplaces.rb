@@ -1,11 +1,11 @@
-class CreateWorkplaces < ActiveRecord::Migration
+class RecreateWorkplaces < ActiveRecord::Migration
   def change
     create_table :workplaces do |t|
       t.string :company
       t.string :position
-      t.integer :startYear
-      t.integer :endYear
-      t.boolean :current
+      t.string :emoji, :limit => 1
+
+      t.integer :user_id
 
       t.timestamps null: false
     end

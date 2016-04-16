@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u| 
-      u.permit(:email, :password, :password_confirmation, :name, :avatar, :skill_list, :experience_list, workplaces_attributes: [:id, :company, :position, :startYear, :endYear, :current, :_destroy])
+      u.permit(:email, :password, :password_confirmation, :name, :avatar, :skill_list, :experience_list, workplaces_attributes: [:id, :company, :position, :emoji, :_destroy])
     end
     devise_parameter_sanitizer.for(:account_update) do |u| 
-      u.permit(:email, :password, :password_confirmation, :current_password, :name, :avatar, :skill_list , :experience_list)
+      u.permit(:email, :password, :password_confirmation, :current_password, :name, :avatar, :skill_list, :experience_list, workplaces_attributes: [:id, :company, :position, :emoji, :_destroy])
     end
   end
 

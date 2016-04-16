@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   end
   resources :tags, only: [:index, :show]
   devise_for :users
+  resources :users, only: [:index, :show]
 end

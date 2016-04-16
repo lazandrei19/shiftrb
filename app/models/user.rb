@@ -2,6 +2,11 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+
+  MY_SALT = 'shift_lazandrei19'
+
+  after_create :generate_hashed_id
+  validates_uniqueness_of :hashed_id
   
   acts_as_taggable_on :skills, :experience
 
@@ -15,4 +20,14 @@ class User < ActiveRecord::Base
   has_many :workplaces, dependent: :destroy
   
   accepts_nested_attributes_for :workplaces, reject_if: proc { |attributes| attributes['company'].blank? }, allow_destroy: true
+
+  def to_param
+    self.hashed_id
+  end
+
+  private
+
+  def generate_hashed_id
+    self.update_attributes(:hashed_id => Digest::SHA1.hexdigest("--#{MY_SALT}--#{self.id}--")[0..15])
+  end
 end
