@@ -1,5 +1,5 @@
 class FeedbacksController < ApplicationController
-  before_action :set_feedback, only: [:destroy]
+  before_action :set_feedback, only: [:destroy, :like]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :authorized_user, only: [:edit, :update, :destroy]
 
@@ -22,6 +22,12 @@ class FeedbacksController < ApplicationController
   end
 
   def like
+    if current_user.voted_for? @feedback
+      @feedback.unliked_by current_user
+    else
+      @feedback.liked_by current_user
+    end
+    redirect_to :back
   end
 
   # DELETE /feedbacks/1
