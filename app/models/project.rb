@@ -7,8 +7,6 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :feedbacks, dependent: :destroy
   has_many :images, dependent: :destroy
-  
-  acts_as_taggable_on :tags
 
   acts_as_votable
 

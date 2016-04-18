@@ -1,0 +1,35 @@
+<h1><%= @user.name %></h1>
+<%= image_tag(@user.avatar.url(:medium)) %>
+<% if user_signed_in? && current_user != @user %>
+  <% if current_user.following? @user %>
+    <%= link_to "Unfollow", follow_user_path(@user), method: :put %>
+  <% else %>
+    <%= link_to "Follow", follow_user_path(@user), method: :put %>
+  <% end %>
+<% end %>
+<h1>hello</h1>
+
+<div class="workplaces">
+  <% @user.workplaces.each do |workplace| %>
+    <div class="workplace">
+      <%= workplace.company %> - <%= workplace.position %> - <%= workplace.emoji %>
+    </div>
+  <% end %>
+</div>
+
+<% @user.projects.each do |project| %>
+  <div class="project">
+    <%= project.name %> <br>
+    <%= image_tag(project.logo(:thumb)) %>
+    <%= project.headline  %>
+    <%= md_render project.description  %>
+  </div>
+<% end %>
+
+<% @user.feedbacks.each do |feedback| %>
+  <div class="feedback">
+    <%= feedback.project.name %> <br>
+    <%= image_tag(feedback.project.logo(:thumb)) %>
+    <%= md_render feedback.content  %>
+  </div>
+<% end %>

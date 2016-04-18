@@ -1,8 +1,18 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :follow]
+  before_action :authenticate_user!, only: [:follow]
 
   def index
     @users = User.all
+  end
+
+  def follow
+    if current_user.following? @user
+      current_user.unfollow @user
+    else
+      current_user.follow @user
+    end
+    redirect_to :back
   end
 
   def show

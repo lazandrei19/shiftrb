@@ -5,14 +5,21 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  helper_method :md_render
+
+  def md_render(text)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(escape_html: true), autolink: true, tables: true)
+    markdown.render(text).html_safe
+  end
+
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u| 
-      u.permit(:email, :password, :password_confirmation, :name, :avatar, :skill_list, :experience_list, workplaces_attributes: [:id, :company, :position, :emoji, :_destroy])
+      u.permit(:email, :password, :password_confirmation, :name, :avatar, workplaces_attributes: [:id, :company, :position, :emoji, :_destroy])
     end
     devise_parameter_sanitizer.for(:account_update) do |u| 
-      u.permit(:email, :password, :password_confirmation, :current_password, :name, :avatar, :skill_list, :experience_list, workplaces_attributes: [:id, :company, :position, :emoji, :_destroy])
+      u.permit(:email, :password, :password_confirmation, :current_password, :name, :avatar, workplaces_attributes: [:id, :company, :position, :emoji, :_destroy])
     end
   end
 

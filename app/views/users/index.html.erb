@@ -1,0 +1,4 @@
+<@ @users do |user| %>
+  <h1><%= user.name %></h1>
+  <%= image_tag(user.avatar.url(:medium)) %>
+<% end %>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   root 'projects#index'
+
   resources :projects do
     resources :feedbacks, only: [:create, :destroy] do
       member do
@@ -13,7 +14,14 @@ Rails.application.routes.draw do
       put "like", to: "projects#like"
     end
   end
+
   resources :tags, only: [:index, :show]
+  
   devise_for :users
-  resources :users, only: [:index, :show]
+
+  resources :users, only: [:index, :show]  do
+    member do
+      put "follow", to: "users#follow"
+    end
+  end
 end

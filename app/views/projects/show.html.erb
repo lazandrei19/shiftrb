@@ -16,21 +16,15 @@
 <% end %>
 <p>
   <strong>by:</strong>
-  <%= @project.user.name %>
+  <%= link_to @project.user.name, user_path(@project.user) %>
 </p>
 <div>
 <p>
   <strong>Headline:</strong>
   <%= @project.headline %>
 </p>
-<strong>Tags:</strong>
-<ul>
-  <% @project.tags.each do |t| %>
-    <li><%= link_to t, tag_path(t) %></li>
-  <% end %>
-</ul>
 <strong>Description:</strong>
-<%= renderer.render(@project.description).html_safe %>
+<%= md_render @project.description %>
 </div>
 
 <strong>Images:</strong>

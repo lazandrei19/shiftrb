@@ -3,12 +3,12 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
+  include Resonatable
+
   MY_SALT = 'shift_lazandrei19'
 
   after_create :generate_hashed_id
   validates_uniqueness_of :hashed_id
-  
-  acts_as_taggable_on :skills, :experience
 
   acts_as_voter
   
