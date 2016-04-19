@@ -7,10 +7,10 @@ class UsersController < ApplicationController
   end
 
   def follow
-    if current_user.following? @user
-      current_user.unfollow @user
-    else
+    unless current_user.following? @user
       current_user.follow @user
+    else
+      current_user.unfollow @user
     end
     redirect_to :back
   end

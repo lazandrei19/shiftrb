@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  include PublicActivity::Common
+
   MY_SALT = 'shift_lazandrei19'
 
   after_create :generate_hashed_id

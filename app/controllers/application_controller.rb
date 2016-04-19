@@ -5,13 +5,6 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :md_render
-
-  def md_render(text)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(escape_html: true), autolink: true, tables: true)
-    markdown.render(text).html_safe
-  end
-
   protected
 
   def configure_permitted_parameters

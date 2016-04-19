@@ -5,10 +5,10 @@
   <%= feedback.get_likes.size %> likes
   <br>
   <% if user_signed_in? %>
-    <% if current_user.voted_for? feedback %>
-      <%= link_to "Unlike", like_project_feedback_path(@project, feedback), method: :put %>
-    <% else %>
+    <% unless current_user.voted_for? feedback %>
       <%= link_to "Like", like_project_feedback_path(@project, feedback), method: :put %>
+    <% else %>
+      <%= link_to "Unlike", like_project_feedback_path(@project, feedback), method: :put %>
     <% end %>
   <% end %>
 </div>

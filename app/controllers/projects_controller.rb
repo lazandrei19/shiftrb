@@ -10,10 +10,13 @@ class ProjectsController < ApplicationController
   end
 
   def like
-    if current_user.voted_for? @project
-      @project.unliked_by current_user
-    else
+    unless current_user.voted_for? @project
+      @project.create_activity :like, owner: current_user
       @project.liked_by current_user
+    else
+      @activity = PublicActivity::Activity.find_by(trackable_id: (@project.id), key: "project.like")
+      @activity.destroy
+      @project.unliked_by current_user
     end
     redirect_to :back
   end
@@ -39,6 +42,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
+        @project.create_activity :create, owner: current_user
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else

@@ -12,6 +12,7 @@ class FeedbacksController < ApplicationController
 
     respond_to do |format|
       if @feedback.save
+        @feedback.create_activity :create, owner: current_user
         format.html { redirect_to @project, notice: 'Feedback was successfully created.' }
         format.json { render :show, status: :created, location: @feedback }
       else
@@ -22,10 +23,10 @@ class FeedbacksController < ApplicationController
   end
 
   def like
-    if current_user.voted_for? @feedback
-      @feedback.unliked_by current_user
-    else
+    unless current_user.voted_for? @feedback
       @feedback.liked_by current_user
+    else
+      @feedback.unliked_by current_user
     end
     redirect_to :back
   end

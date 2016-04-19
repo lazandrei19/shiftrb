@@ -1,4 +1,6 @@
 class Feedback < ActiveRecord::Base
+  include PublicActivity::Common
+
   after_create :generate_hashed_id
   validates_uniqueness_of :hashed_id
 

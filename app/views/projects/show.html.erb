@@ -8,10 +8,10 @@
 <%= @project.get_likes.size %> likes
 <br>
 <% if user_signed_in? %>
-  <% if current_user.voted_for? @project %>
-    <%= link_to "Unlike", like_project_path(@project), method: :put %>
-  <% else %>
+  <% unless current_user.voted_for? @project %>
     <%= link_to "Like", like_project_path(@project), method: :put %>
+  <% else %>
+    <%= link_to "Unlike", like_project_path(@project), method: :put %>
   <% end %>
 <% end %>
 <p>

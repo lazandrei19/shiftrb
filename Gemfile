@@ -36,6 +36,8 @@ gem 'paperclip', '~> 4.3', '>= 4.3.6'
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
 # Used for following
 gem 'resonance', '~> 0.3.2'
+# Used for the main feed
+gem 'public_activity', '~> 1.4', '>= 1.4.2' 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
