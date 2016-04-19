@@ -4,7 +4,7 @@
   <br>
   <%= feedback.get_likes.size %> likes
   <br>
-  <% if user_signed_in? %>
+  <% if user_signed_in? && feedback.user != current_user %>
     <% unless current_user.voted_for? feedback %>
       <%= link_to "Like", like_project_feedback_path(@project, feedback), method: :put %>
     <% else %>

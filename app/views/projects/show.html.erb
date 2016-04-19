@@ -7,7 +7,7 @@
 </p>
 <%= @project.get_likes.size %> likes
 <br>
-<% if user_signed_in? %>
+<% if user_signed_in? && @project.user != current_user %>
   <% unless current_user.voted_for? @project %>
     <%= link_to "Like", like_project_path(@project), method: :put %>
   <% else %>
