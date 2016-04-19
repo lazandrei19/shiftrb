@@ -3,8 +3,6 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :authorized_user, only: [:edit, :update, :destroy]
 
-  # GET /projects
-  # GET /projects.json
   def index
     @projects = Project.all
   end
@@ -13,70 +11,54 @@ class ProjectsController < ApplicationController
     unless current_user.voted_for? @project
       @project.create_activity :like, owner: current_user, recipient: @project.user
       @project.create_activity :likeNotification, owner: current_user, recipient: @project.user
+
       @project.liked_by current_user
     else
       @activity = PublicActivity::Activity.find_by(trackable_id: (@project.id), key: "project.like")
       @activityNotification = PublicActivity::Activity.find_by(trackable_id: (@project.id), key: "project.likeNotification")
       @activity.destroy
       @activityNotification.destroy
+
       @project.unliked_by current_user
     end
+
     redirect_to :back
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
   end
 
-  # GET /projects/new
   def new
     @project = Project.new
   end
 
-  # GET /projects/1/edit
   def edit
   end
 
-  # POST /projects
-  # POST /projects.json
   def create
     @project = current_user.projects.new(project_params)
 
-    respond_to do |format|
-      if @project.save
-        @project.create_activity :create, owner: current_user
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
-      else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.save
+      @project.create_activity :create, owner: current_user
+      
+      redirect_to @project, notice: 'Project was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
   def update
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
-      else
-        format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.update(project_params)
+      redirect_to @project
+    else
+      render :edit
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
     @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    
+    redirect_to projects_url
   end
 
   private

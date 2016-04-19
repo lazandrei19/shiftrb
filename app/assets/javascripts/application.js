@@ -16,5 +16,3 @@
 //= require turbolinks
 //= require cocoon
 //= require_tree .
-var foo = require('../modules/foo');
-console.log(foo(9));

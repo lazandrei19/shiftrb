@@ -5,21 +5,15 @@ class RepliesController < ApplicationController
     @replies = Reply.all
   end
 
-  # POST /replies
-  # POST /replies.json
   def create
     @feedback = Feedback.find_by_hashed_id(params[:feedback_id])
     @reply = @feedback.replies.new(reply_params)
     @reply.user = current_user
 
-    respond_to do |format|
-      if @reply.save
-        format.html { redirect_to :back, notice: 'Reply was successfully created.' }
-        format.json { render :show, status: :created, location: @reply }
-      else
-        format.html { render :new }
-        format.json { render json: @reply.errors, status: :unprocessable_entity }
-      end
+    if @reply.save
+      redirect_to :back
+    else
+      redirect_to @project
     end
   end
 

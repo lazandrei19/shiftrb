@@ -1,7 +1,6 @@
 class FeedbacksController < ApplicationController
-  before_action :set_feedback, only: [:destroy, :like]
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :authorized_user, only: [:edit, :update, :destroy]
+  before_action :set_feedback, only: :like
+  before_action :authenticate_user!
 
   # POST /feedbacks
   # POST /feedbacks.json
@@ -10,16 +9,12 @@ class FeedbacksController < ApplicationController
     @feedback = @project.feedbacks.new(feedback_params)
     @feedback.user = current_user
 
-    respond_to do |format|
-      if @feedback.save
-        @feedback.create_activity :create, owner: current_user, recipient: @feedback.project.user
-        @feedback.create_activity :createNotification, owner: current_user, recipient: @feedback.project.user
-        format.html { redirect_to @project, notice: 'Feedback was successfully created.' }
-        format.json { render :show, status: :created, location: @feedback }
-      else
-        format.html { render :new }
-        format.json { render json: @feedback.errors, status: :unprocessable_entity }
-      end
+    if @feedback.save
+      @feedback.create_activity :create, owner: current_user, recipient: @feedback.project.user
+      @feedback.create_activity :createNotification, owner: current_user, recipient: @feedback.project.user
+      redirect_to @project
+    else
+      redirect_to @project
     end
   end
 
@@ -33,16 +28,6 @@ class FeedbacksController < ApplicationController
       @feedback.unliked_by current_user
     end
     redirect_to :back
-  end
-
-  # DELETE /feedbacks/1
-  # DELETE /feedbacks/1.json
-  def destroy
-    @feedback.destroy
-    respond_to do |format|
-      format.html { redirect_to feedbacks_url, notice: 'Feedback was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
