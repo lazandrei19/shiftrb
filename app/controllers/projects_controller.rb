@@ -11,11 +11,14 @@ class ProjectsController < ApplicationController
 
   def like
     unless current_user.voted_for? @project
-      @project.create_activity :like, owner: current_user
+      @project.create_activity :like, owner: current_user, recipient: @project.user
+      @project.create_activity :likeNotification, owner: current_user, recipient: @project.user
       @project.liked_by current_user
     else
       @activity = PublicActivity::Activity.find_by(trackable_id: (@project.id), key: "project.like")
+      @activityNotification = PublicActivity::Activity.find_by(trackable_id: (@project.id), key: "project.likeNotification")
       @activity.destroy
+      @activityNotification.destroy
       @project.unliked_by current_user
     end
     redirect_to :back

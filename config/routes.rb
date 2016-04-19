@@ -22,5 +22,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :activities
+  get "activities", to: "activities#index"
+  get "notifications", to: "activities#notifications"
 end

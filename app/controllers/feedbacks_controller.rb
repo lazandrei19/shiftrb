@@ -12,7 +12,8 @@ class FeedbacksController < ApplicationController
 
     respond_to do |format|
       if @feedback.save
-        @feedback.create_activity :create, owner: current_user
+        @feedback.create_activity :create, owner: current_user, recipient: @feedback.project.user
+        @feedback.create_activity :createNotification, owner: current_user, recipient: @feedback.project.user
         format.html { redirect_to @project, notice: 'Feedback was successfully created.' }
         format.json { render :show, status: :created, location: @feedback }
       else
@@ -25,7 +26,10 @@ class FeedbacksController < ApplicationController
   def like
     unless current_user.voted_for? @feedback
       @feedback.liked_by current_user
+      @feedback.create_activity :likeNotification, owner: current_user, recipient: @feedback.user
     else
+      @activity = PublicActivity::Activity.find_by(trackable_id: (@feedback.id), key: "feedback.likeNotification")
+      @activity.destroy
       @feedback.unliked_by current_user
     end
     redirect_to :back
