@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418200847) do
+ActiveRecord::Schema.define(version: 20160419150420) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -77,6 +77,17 @@ ActiveRecord::Schema.define(version: 20160418200847) do
 
   add_index "projects", ["hashed_id"], name: "index_projects_on_hashed_id"
   add_index "projects", ["user_id"], name: "index_projects_on_user_id"
+
+  create_table "replies", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "feedback_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "replies", ["feedback_id"], name: "index_replies_on_feedback_id"
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

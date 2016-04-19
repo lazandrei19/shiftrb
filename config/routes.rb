@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root 'projects#index'
 
   resources :projects do
-    resources :feedbacks, only: [:create, :destroy] do
+    resources :feedbacks, only: :create do
+      resources :replies, only: :create
       member do
         put "like", to: "feedbacks#like"
       end

@@ -7,6 +7,8 @@ class Feedback < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
+  has_many :replies, dependent: :destroy
+
   acts_as_votable
 
   MY_SALT = 'fhfhodfhohfhiodoiclkdhnsfhihewoifadmfj90qewyq9wq'
