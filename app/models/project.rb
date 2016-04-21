@@ -10,6 +10,12 @@ class Project < ActiveRecord::Base
   has_many :feedbacks, dependent: :destroy
   has_many :images, dependent: :destroy
 
+  validates_presence_of :name
+  validates_presence_of :logo
+  validates_presence_of :headline
+  validates_presence_of :description
+  validates_presence_of :user
+
   acts_as_votable
 
   has_attached_file :logo, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"

@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   include Resonatable
@@ -25,6 +23,14 @@ class User < ActiveRecord::Base
   def to_param
     self.hashed_id
   end
+
+  validates_presence_of :name
+  validates_presence_of :avatar
+  validates_presence_of :workplaces
+  validates_associated :workplaces
+  validates_associated :replies
+  validates_associated :projects
+  validates_associated :feedbacks
 
   private
 

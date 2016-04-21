@@ -11,11 +11,16 @@ class Feedback < ActiveRecord::Base
 
   acts_as_votable
 
-  MY_SALT = 'fhfhodfhohfhiodoiclkdhnsfhihewoifadmfj90qewyq9wq'
+  MY_SALT = 'shift_lazandrei19'
 
   def to_param
     self.hashed_id
   end
+
+  validates_presence_of :content
+  validates_presence_of :project
+  validates_presence_of :user
+  validates_associated :replies
 
   private
 
