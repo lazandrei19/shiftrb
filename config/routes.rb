@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'projects#index'
+  root 'activities#index'
 
   resources :projects do
     resources :feedbacks, only: :create do
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get "activities", to: "activities#index"
+  get "search", to: "searches#search"
+
   get "notifications", to: "activities#notifications"
 end

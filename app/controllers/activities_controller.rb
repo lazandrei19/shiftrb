@@ -1,6 +1,10 @@
 class ActivitiesController < ApplicationController
   def index
-    @activities = PublicActivity::Activity.order("created_at desc").where(owner: current_user.following, key: ["feedback.create", "project.create", "project.like"])
+    if user_signed_in?
+      @activities = PublicActivity::Activity.order("created_at desc").where(owner: current_user.following, key: ["feedback.create", "project.create", "project.like"])
+    else
+      render "landing"
+    end
   end
 
   def notifications

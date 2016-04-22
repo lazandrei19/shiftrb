@@ -4,7 +4,6 @@ class Workplace < ActiveRecord::Base
   validates_presence_of :company
   validates_presence_of :position
   validates_presence_of :emoji
-  validates_presence_of :user
 
   validates :emoji, length: { is: 1 }
 
