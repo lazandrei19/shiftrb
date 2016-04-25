@@ -16,6 +16,10 @@ class Project < ActiveRecord::Base
   validates_presence_of :description
   validates_presence_of :user
 
+  searchable do
+    text :headline, :description, :name
+  end
+
   acts_as_votable
 
   has_attached_file :logo, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
