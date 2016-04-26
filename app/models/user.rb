@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   after_create :generate_hashed_id
   validates_uniqueness_of :hashed_id
 
+  searchable do
+    text :name
+  end
+
   acts_as_voter
   
   has_attached_file :avatar, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"

@@ -1,19 +1,18 @@
 class SearchesController < ApplicationController
   def search
-    # search = Project.search do
-    #   fulltext :q do
-    #     boost_fields :name => 10.0
-    #     boost_fields :headline => 5.0
-    #   end
-    # end
 
-    search = Sunspot.search(Project) do
+    projectSearch = Sunspot.search(Project) do
       keywords params[:q] do
         boost_fields :name => 10.0
         boost_fields :headline => 5.0
       end
     end
 
-    @projects = search.results
+    userSearch = Sunspot.search(User) do
+      keywords params[:q]
+    end
+
+    @projects = projectSearch.results
+    @users = userSearch.results
   end
 end
