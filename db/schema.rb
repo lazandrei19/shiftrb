@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419150420) do
+ActiveRecord::Schema.define(version: 20160426074300) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20160419150420) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer  "score"
   end
 
   add_index "projects", ["hashed_id"], name: "index_projects_on_hashed_id"

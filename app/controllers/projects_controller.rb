@@ -26,6 +26,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @project.increment! :score
   end
 
   def new

@@ -4,17 +4,33 @@
   <title>Shift</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Raleway|Dancing+Script' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
-<body class="container">
-<% if user_signed_in? %>
-  <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-  <br>
-  <%= link_to "Edit profile", edit_user_registration_path %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path%>
-  <%= link_to "Sign in", new_user_session_path %>
-<% end %>
+<body>
+<header>
+  <div class="links">
+    <%= link_to "Shift", root_path, :class=> "logo" %>
+    <%= link_to "Discover", discover_path, :class=> "discover" %>
+  </div>
+  <div class="search">
+    <%= form_tag("/search", method: "get", class: "search-form") do %>
+      <%= text_field_tag :q, nil, class: "search-input", :placeholder => "Search", :autocomplete => "off" %>
+      <%= submit_tag "", :class => "search-submit" %>
+    <% end %>
+  </div>
+  <% if user_signed_in? %>
+    <div class="person">
+      <%= render "icons/notification", locals: { unread: false } %>
+      <%= link_to current_user.name.split[0], current_user, :class=> "user" %>
+      <%= render "icons/settings" %>
+    </div>
+  <% else %>
+    <div class="person">
+      <%= link_to "Sign in", new_user_session_path %>
+    </div>
+  <% end %>
+</header>
 
 <%= yield %>
 

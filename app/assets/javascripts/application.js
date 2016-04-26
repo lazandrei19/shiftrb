@@ -16,3 +16,8 @@
 //= require turbolinks
 //= require cocoon
 //= require_tree .
+$(() => {
+$("header .person .settings").click(function () {
+  $("header .person .settings-dropdown").toggle();
+});
+});

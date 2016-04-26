@@ -23,5 +23,7 @@ Rails.application.routes.draw do
 
   get "search", to: "searches#search"
 
+  get "discover", to: "misc#discover"
+
   get "notifications", to: "activities#notifications"
 end

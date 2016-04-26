@@ -1,20 +1,148 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
  *= require_self
  */
-@import "bootstrap-sprockets"
-@import "bootstrap"
+
+@charset "utf-8"
+
+@import "bourbon/bourbon"
+@import "vars"
+@import "feedbacks"
+@import "projects"
+
+\:root
+  font-size: 24px
+  font-family: "Raleway"
 
 body
-  padding-bottom: 150px
+  background-color: #f7f7f7
+  padding-top: 80px
+
+a
+  color: $main-color
+  text-decoration: none
+
+  &:hover
+    color: $main-color
+
+header
+  +position(fixed, 0 0 null 0)
+  height: 80px
+  border: 1px solid black
+  box-sizing: border-box
+  background-color: #fff
+  display: flex
+  justify-content: space-around
+  align-items: center
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+  .links
+    display: flex
+    justify-content: space-between
+    align-items: center
+    .logo
+      font-size: 1.33em
+      font-family: "Dancing Script", sans-serif
+      padding: 10px
+    .discover
+      padding: 10px
+  
+  .search
+    .search-form
+      position: relative
+      width: 500px
+
+      .search-input
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        background: 
+          color: #efefef 
+          image: url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) 
+          repeat: no-repeat 
+          position: 
+            x: 9px
+            y: center 
+        border: solid 1px #efefef
+        padding: 9px 10px 9px 32px
+        width: 224px
+        border-radius: 1em
+        transition: all .5s
+        font-size: .70833em
+
+        &:focus
+          width: 500px
+          background-color: #fff
+          outline: 0
+          text-align: left
+
+        &:-moz-placeholder
+          color: #bbbdbf
+
+        &::-webkit-input-placeholder
+          color: #bbbdbf
+      .search-submit
+        display: none
+
+  .person
+    display: flex
+    justify-content: space-between
+    align-items: center
+    position: relative
+    .notification
+      width: 40px
+      height: 40px
+      cursor: pointer
+      padding: 10px
+    .user
+      padding: 10px
+    .settings
+      padding: 10px
+      width: 15px
+      height: 15px
+      cursor: pointer
+
+    .settings-dropdown
+      width: 200px
+      position: absolute
+      top: 70px
+      right: -25px
+      display: none
+      text-align: center
+
+      .settings-dropdown-arrow-container
+        position: absolute
+        right: 0
+        top: -10px
+        pointer-events: none
+        
+        .settings-dropdown-arrow
+          background-color: #f7f7f7
+          border: 1px solid black
+          width: 80px
+          height: 80px
+          transform: rotate(45deg)
+          -webkit-clip-path: polygon(0 0, 0 50%, 50% 0)
+          clip-path: polygon(0 0, 0 50%, 50% 0)
+          pointer-events: none
+        
+      
+      .settings-dropdown-content
+        background: white
+        border: 1px solid black
+        
+        .settings-dropdown-link-container
+          padding: 5px
+          margin: 2px 0
+          background-color: #f7f7f7
+
+          .settings-dropdown-link
+            color: black
+            font-family: "Open Sans"
+            font-size: 0.70833em
+
+          .settings-dropdown-link-primary
+            color: #79c0cc

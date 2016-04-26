@@ -6,6 +6,8 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks.json
   def create
     @project = Project.find_by_hashed_id(params[:project_id])
+    @project.score += 5
+    @project.save
     @feedback = @project.feedbacks.new(feedback_params)
     @feedback.user = current_user
 
