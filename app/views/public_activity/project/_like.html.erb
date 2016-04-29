@@ -1,3 +1,15 @@
-<%= link_to activity.owner.name, activity.owner %>
-likes
-<%= link_to activity.trackable.name, activity.trackable %>
+<div class="activity">
+  <%= image_tag activity.owner.avatar.url(:thumb), class: "avatar" %>
+  <%= image_tag activity.trackable.logo.url(:thumb), class: "logo" %>
+  <div class="text">
+    <div class="heading">
+      <%= link_to activity.owner.name, activity.owner %>
+      <%= render "icons/heart" %> likes
+      <%= link_to activity.trackable.name, activity.trackable %>.
+    </div>
+    <div class="content">
+      <%= truncate(activity.trackable.headline, length: 140, omission: '') %>
+      <%= link_to '...', activity.trackable %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<header>
+  <div class="links">
+    <%= link_to "Shift", root_path, :class=> "logo" %>
+    <%= link_to "Discover", discover_path, :class=> "discover" %>
+  </div>
+  <% if user_signed_in? %>
+    <div class="search">
+      <%= form_tag("/search", method: "get", class: "search-form") do %>
+        <%= text_field_tag :q, nil, class: "search-input", :placeholder => "Search", :autocomplete => "off" %>
+        <%= submit_tag "", :class => "search-submit" %>
+      <% end %>
+    </div>
+    <div class="person">
+      <%= render "icons/notification", :locals => { :unread => true } %>
+      <% if false %>
+        <%= render "dropdowns/notification_first_time" %>
+      <% else %>
+        <%= render "dropdowns/notification" %>
+      <% end %>
+      <%= link_to current_user.name.split[0], current_user, :class=> "user" %>
+      <%= render "icons/settings" %>
+    </div>
+  <% else %>
+    <div class="not-logged-in">
+      <%= link_to "Log in", new_user_session_path, :class => "log-in" %>
+      <%= link_to "Sign up", new_user_registration_path, :class => "sign-up" %>
+    </div>
+  <% end %>
+</header>

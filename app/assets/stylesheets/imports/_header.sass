@@ -1,0 +1,185 @@
+header
+  +position(fixed, 0 0 null 0)
+  height: 80px
+  border: 1px solid black
+  box-sizing: border-box
+  background-color: #fff
+  display: flex
+  justify-content: space-around
+  align-items: center
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+  .links
+    display: flex
+    justify-content: space-between
+    align-items: center
+    .logo
+      font-size: 1.33em
+      font-family: "Dancing Script", sans-serif
+      padding: 10px
+    .discover
+      padding: 10px
+  
+  .search
+    .search-form
+      position: relative
+      width: 500px
+
+      .search-input
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        background: 
+          color: #efefef 
+          image: url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) 
+          repeat: no-repeat 
+          position: 
+            x: 9px
+            y: center 
+        border: solid 1px #efefef
+        padding: 9px 10px 9px 32px
+        width: 224px
+        border-radius: 5px
+        transition: all .5s
+        font-size: .70833em
+
+        &:focus
+          width: 500px
+          background-color: #fff
+          outline: 0
+          text-align: left
+
+        &:-moz-placeholder
+          color: #bbbdbf
+
+        &::-webkit-input-placeholder
+          color: #bbbdbf
+      .search-submit
+        display: none
+
+  .person
+    display: flex
+    justify-content: space-between
+    align-items: center
+    position: relative
+    
+    .notification-icon
+      width: 40px
+      height: 40px
+      cursor: pointer
+      padding: 10px
+    
+    .notification-dropdown
+      width: 338px
+      position: absolute
+      top: 80px
+      right: -12px
+      display: none
+      text-align: center
+
+      .notification-dropdown-arrow-container
+        position: absolute
+        left: 50%
+        transform: translateX(-50%)
+        top: -11px
+        pointer-events: none
+        
+        .notification-dropdown-arrow
+          background-color: #f7f7f7
+          border: 1px solid black
+          width: 80px
+          height: 80px
+          transform: rotate(45deg)
+          -webkit-clip-path: polygon(0 0, 0 50%, 50% 0)
+          clip-path: polygon(0 0, 0 50%, 50% 0)
+          pointer-events: none
+      .notification-dropdown-content
+        background: white
+        border: 1px solid black
+        height: 253px
+
+        .notification-dropdown-header
+          background-color: #f7f7f7
+          color: #a8a8a8
+          font-size: .7083em
+          height: 35px
+          line-height: 35px
+          border-bottom: 1px solid black
+
+        .notification-icon-big
+          width: 80px
+          height: 80px
+          margin-top: 13px
+
+        .notification-hint
+          font-size: .625em
+          font-family: "Raleway"
+          text-align: left
+          padding-left: 16px
+          margin: 0
+          line-height: 1rem
+
+        .and
+          text-align: center
+          color: #a8a8a8
+          font-size: .625em
+
+    .user
+      padding: 10px
+    .settings
+      padding: 10px
+      width: 15px
+      height: 15px
+      cursor: pointer
+
+    .settings-dropdown
+      width: 200px
+      position: absolute
+      top: 70px
+      right: -25px
+      display: none
+      text-align: center
+
+      .settings-dropdown-arrow-container
+        position: absolute
+        right: 0
+        top: -11px
+        pointer-events: none
+        
+        .settings-dropdown-arrow
+          background-color: #f7f7f7
+          border: 1px solid black
+          width: 80px
+          height: 80px
+          transform: rotate(45deg)
+          -webkit-clip-path: polygon(0 0, 0 50%, 50% 0)
+          clip-path: polygon(0 0, 0 50%, 50% 0)
+          pointer-events: none
+        
+      
+      .settings-dropdown-content
+        background: white
+        border: 1px solid black
+        
+        .settings-dropdown-link-container
+          padding: 5px
+          margin: 2px 0
+          background-color: #f7f7f7
+
+          .settings-dropdown-link
+            color: black
+            font-family: "Open Sans"
+            font-size: 0.70833em
+
+          .settings-dropdown-link-primary
+            color: #79c0cc
+
+  .not-logged-in
+    .log-in
+      padding: 10px
+    .sign-up
+      padding: 10px

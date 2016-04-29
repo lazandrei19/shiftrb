@@ -1,3 +1,15 @@
-<%= link_to activity.owner.name, activity.owner %>
-helped
-<%= link_to activity.trackable.project.name, activity.trackable.project %>
+<div class="activity">
+  <%= image_tag activity.owner.avatar.url(:thumb), class: "avatar" %>
+  <%= image_tag activity.trackable.project.logo.url(:thumb), class: "logo" %>
+  <div class="text">
+    <div class="heading">
+      <%= link_to activity.owner.name, activity.owner %>
+      helped
+      <%= link_to activity.trackable.project.name, activity.trackable.project %>.
+    </div>
+    <div class="content">
+      <%= truncate(activity.trackable.content, length: 140, omission: '') %>
+      <%= link_to '...', activity.trackable.project %>
+    </div>
+  </div>
+</div>

@@ -8,31 +8,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-  <div class="links">
-    <%= link_to "Shift", root_path, :class=> "logo" %>
-    <%= link_to "Discover", discover_path, :class=> "discover" %>
-  </div>
-  <div class="search">
-    <%= form_tag("/search", method: "get", class: "search-form") do %>
-      <%= text_field_tag :q, nil, class: "search-input", :placeholder => "Search", :autocomplete => "off" %>
-      <%= submit_tag "", :class => "search-submit" %>
-    <% end %>
-  </div>
-  <% if user_signed_in? %>
-    <div class="person">
-      <%= render "icons/notification", locals: { unread: false } %>
-      <%= link_to current_user.name.split[0], current_user, :class=> "user" %>
-      <%= render "icons/settings" %>
-    </div>
-  <% else %>
-    <div class="person">
-      <%= link_to "Sign in", new_user_session_path %>
-    </div>
-  <% end %>
-</header>
+<%= render "partials/header" %>
 
-<%= yield %>
+<div class="container">
+  <%= yield %>
+</div>
 
 </body>
 </html>

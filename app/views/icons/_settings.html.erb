@@ -3,19 +3,4 @@
   <rect x="0" y="5.9" fill="#F0EFEF" width="15" height="3.1"/>
   <rect x="0" y="11.9" fill="#F0EFEF" width="15" height="3.1"/>
 </svg>
-<div class="settings-dropdown">
-  <div class="settings-dropdown-arrow-container">
-    <div class="settings-dropdown-arrow"></div>
-  </div>
-  <div class="settings-dropdown-content">
-    <div class="settings-dropdown-link-container">
-      <%= link_to "Add a new project", new_project_path, :class => "settings-dropdown-link settings-dropdown-link-primary" %>
-    </div>
-    <div class="settings-dropdown-link-container">
-      <%= link_to "Settings", edit_user_registration_path, :class => "settings-dropdown-link" %>
-    </div>
-    <div class="settings-dropdown-link-container">
-      <%= link_to "Log out", destroy_user_session_path, { :class => "settings-dropdown-link", :method => :delete } %>
-    </div>
-  </div>
-</div>
+<%= render "dropdowns/settings" %>
