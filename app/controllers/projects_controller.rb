@@ -42,6 +42,10 @@ class ProjectsController < ApplicationController
     if @project.save
       @project.create_activity :create, owner: current_user
       
+      members[:members].each_line do |member|
+        @project.members.create(:user => User.find_by_hashed_id(/\/users\/(\w{16})/.match(member)[1]))
+      end
+      
       redirect_to @project, notice: 'Project was successfully created.'
     else
       render :new
@@ -50,6 +54,10 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
+      @project.members.delete_all
+      members[:members].each_line do |member|
+        @project.members.create(:user => User.find_by_hashed_id(/\/users\/(\w{16})/.match(member)[1]))
+      end
       redirect_to @project
     else
       render :edit
@@ -77,5 +85,9 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:name, :logo, :headline, :description, images_attributes: [:id, :image, :_destroy])
+    end
+    
+    def members
+      params.require(:project).permit(:members)
     end
 end

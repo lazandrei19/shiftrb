@@ -1,54 +1,16 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-  <%= image_tag(@project.logo.url(:medium)) %>
-</p>
-<%= @project.get_likes.size %> likes
-<br>
-<% if user_signed_in? && @project.user != current_user %>
-  <% unless current_user.voted_for? @project %>
-    <%= link_to "Like", like_project_path(@project), method: :put %>
-  <% else %>
-    <%= link_to "Unlike", like_project_path(@project), method: :put %>
-  <% end %>
-<% end %>
-<p>
-  <strong>by:</strong>
-  <%= link_to @project.user.name, user_path(@project.user) %>
-</p>
-<div>
-<p>
-  <strong>Headline:</strong>
-  <%= @project.headline %>
-</p>
-<strong>Description:</strong>
-<%= md_render @project.description %>
+<div class="project">
+  <div class="info">
+    <div class="logo">
+      <%= image_tag @project.logo.url(:medium), :class => "logo-image" %>
+    </div>
+    <div class="name"><%= @project.name %></div>
+    <div class="headline"><%= @project.headline %></div>
+  </div>
+  <div class="description"><%= @project.description %></div>
+  <div class="members">
+    <% @project.members.each do |member| %>
+      <%= member.user.name %>
+      <br>
+    <% end %>
+  </div>
 </div>
-
-<strong>Images:</strong>
-<ul>
-  <% @project.images.each do |i| %>
-    <li><%= image_tag(i.image.url(:original)) %></li>
-  <% end %>
-</ul>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
-
-<%= simple_form_for [@project, Feedback.new] do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :content, label: "Give feedback" %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Submit" %>
-  </div>
-<% end %>
-
-<p><%= @project.feedbacks.count %> people have given feedback so far</p>
-
-<%= render @project.feedbacks %>

@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :feedbacks, dependent: :destroy
   has_many :images, dependent: :destroy
+  has_many :members, dependent: :destroy
 
   validates_presence_of :name
   validates_presence_of :logo

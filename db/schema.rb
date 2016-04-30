@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426074300) do
+ActiveRecord::Schema.define(version: 20160430124442) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(version: 20160426074300) do
 
   add_index "images", ["project_id"], name: "index_images_on_project_id"
 
+  create_table "members", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "project_id"
+  end
+
+  add_index "members", ["project_id"], name: "index_members_on_project_id"
+  add_index "members", ["user_id"], name: "index_members_on_user_id"
+
   create_table "projects", force: :cascade do |t|
     t.string   "hashed_id"
     t.string   "name"
@@ -74,9 +84,11 @@ ActiveRecord::Schema.define(version: 20160426074300) do
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.integer  "score"
+    t.integer  "member_id"
   end
 
   add_index "projects", ["hashed_id"], name: "index_projects_on_hashed_id"
+  add_index "projects", ["member_id"], name: "index_projects_on_member_id"
   add_index "projects", ["user_id"], name: "index_projects_on_user_id"
 
   create_table "replies", force: :cascade do |t|
@@ -109,10 +121,12 @@ ActiveRecord::Schema.define(version: 20160426074300) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "hashed_id"
+    t.integer  "member_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["hashed_id"], name: "index_users_on_hashed_id"
+  add_index "users", ["member_id"], name: "index_users_on_member_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "votes", force: :cascade do |t|
