@@ -1,3 +1,8 @@
-<%= link_to activity.owner.name, activity.owner %>
-appreciated
-<%= link_to activity.trackable.name, activity.trackable %>
+<div class="notification">
+  <%= image_tag activity.owner.avatar.url(:thumb), class: "avatar" %>
+  <div class="content">
+    <%= link_to activity.owner.name, activity.owner %>
+    appreciated
+    <%= link_to activity.trackable.name, activity.trackable %> .
+  </div>
+</div>

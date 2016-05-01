@@ -1,0 +1,18 @@
+<div class="notification-dropdown">
+  <div class="notification-dropdown-arrow-container">
+    <div class="notification-dropdown-arrow"></div>
+  </div>
+  <div class="notification-dropdown-content">
+    <div class="notification-dropdown-header">
+      Notifications
+    </div>
+    <div class="notifications">
+      <% if @notifications %>
+        <% @notifications.each do |notification| %>
+          <%= render_activity notification %>
+        <% end %>
+        <%= link_to "+ More", notifications_path, :class => "more" %>
+      <% end %>
+    </div>
+  </div>
+</div>

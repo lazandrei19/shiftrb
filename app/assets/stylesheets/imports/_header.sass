@@ -100,15 +100,38 @@ header
       .notification-dropdown-content
         background: white
         border: 1px solid black
-        height: 253px
 
         .notification-dropdown-header
           background-color: #f7f7f7
           color: #a8a8a8
-          font-size: .7083em
+          font-size: .70833em
           height: 35px
           line-height: 35px
           border-bottom: 1px solid black
+
+        .notifications
+          background-color: white
+
+          .notification
+            border-bottom: 1px solid black
+            font-size: .66em
+            font-family: "Open Sans"
+            padding: 10px
+            +clearfix
+            display: flex
+            align-items: center
+
+            .avatar
+              float: left
+              border-radius: 50%
+
+            .content
+              text-align: left
+              margin-left: 10px
+
+          .more:
+            font-size: .70833em
+
 
         .notification-icon-big
           width: 80px
@@ -173,7 +196,7 @@ header
           .settings-dropdown-link
             color: black
             font-family: "Open Sans"
-            font-size: 0.70833em
+            font-size: .70833em
 
           .settings-dropdown-link-primary
             color: #79c0cc

@@ -24,10 +24,14 @@ class FeedbacksController < ApplicationController
     unless current_user.voted_for? @feedback
       @feedback.liked_by current_user
       @feedback.create_activity :likeNotification, owner: current_user, recipient: @feedback.user
+      @feedback.user.appreciation += 1
+      @feedback.user.save
     else
       @activity = PublicActivity::Activity.find_by(trackable_id: (@feedback.id), key: "feedback.likeNotification")
       @activity.destroy
       @feedback.unliked_by current_user
+      @feedback.user.appreciation -= 1
+      @feedback.user.save
     end
     redirect_to :back
   end
