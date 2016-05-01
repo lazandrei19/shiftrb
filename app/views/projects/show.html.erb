@@ -13,4 +13,11 @@
       <br>
     <% end %>
   </div>
+  <div class="image-carousel">
+    <% @project.images.each do |image| %>
+      <div class="carousel-image-contaier">
+        <%= image_tag image.image.url(:original), :class => "carousel-image" %>
+      </div>
+    <% end %>
+  </div>
 </div>
