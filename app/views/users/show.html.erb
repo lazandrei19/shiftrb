@@ -15,20 +15,70 @@
       </div>
       <div class="appreciation">
         <%= render "icons/heart" %>
-        <span class="appreciations"><%= @user.appreciation %></span>
+        <span class="appreciations"><%= @user.appreciation || 0 %></span>
         of
         <%= @user.name.split[0] %>'s
         comments were appreciated
       </div>
     </div>
-    <% if @user != current_user %>
+    <% if user_signed_in? && @user != current_user %>
       <div class="buttons">
-        <div class="button follow">
-          <%= link_to "Follow", follow_user_path, :method => :put %>
-        </div>
+        <% unless current_user.following? @user %>
+          <div class="button follow">
+            <%= link_to "Follow", follow_user_path, :class => "follow-link", :method => :put %>
+          </div>
+        <% else %>
+          <div class="button unfollow">
+            <%= link_to "Unfollow", follow_user_path, :class => "unfollow-link", :method => :put %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>
-  <div class="projects"></div>
-  <div class="feedback"></div>
+  <% if @user.projects.count > 0 %>
+    <div class="projects">
+      <div class="projects-title">Projects:</div>
+      <div class="projects-container">
+        <% @user.projects.order("created_at DESC").each do |project| %>
+          <div class="project">
+            <div class="logo">
+              <%= image_tag project.logo.url(:thumb), :class => "logo-image" %>
+            </div>
+            <div class="text">
+              <div class="name"><%= project.name %></div>
+              <div class="description">
+                <%= truncate(project.headline, length: 140, omission: '') %>
+                <%= link_to '...', project %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <% if @user.feedbacks.count > 0 %>
+    <div class="feedbacks">
+      <div class="feedbacks-title">Feedback:</div>
+      <div class="feedbacks-container">
+        <% @user.feedbacks.order("created_at DESC").each do |feedback| %>
+          <div class="feedback">
+            <div class="logo">
+              <%= image_tag feedback.project.logo.url(:thumb), :class => "logo-image" %>
+            </div>
+            <div class="appreciation">
+              <%= render "icons/heart" %>
+              <%= feedback.votes_for.size %>
+            </div>
+            <div class="text">
+              <div class="name"><%= feedback.project.name %></div>
+              <div class="description">
+                <%= truncate(feedback.content, length: 140, omission: '') %>
+                <%= link_to '...', feedback.project %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

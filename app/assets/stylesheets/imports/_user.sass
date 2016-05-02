@@ -1,4 +1,4 @@
-.container .user
+.container > .user
   width: 100%
   margin-top: 30px
   padding: 0 155px
@@ -42,8 +42,102 @@
         height: 30px
         margin-top: 15px
         border-radius: 5px
-        background-color: white
         line-height: 30px
         text-align: center
         font-size: .79166em
         font-family: "Open Sans"
+
+        &.follow
+          background-color: #79c0cc
+
+          .follow-link
+            color: white
+
+        &.unfollow
+          background-color: white
+
+  .projects
+    margin-top: 30px
+    width: 75%
+
+    .projects-title
+      font-size: .70833em
+      font-family: "Open Sans"
+
+    .projects-container
+      border: 1px solid black
+      margin-top: 5px
+      
+      .project
+        padding: 10px 40px
+        +clearfix
+        background-color: #fff
+        border-top: 1px solid black
+
+        &:first-child
+          border: 0
+
+        .logo
+          float: left
+
+          .logo-image
+            border-radius: 50%
+        
+        .text
+          margin-left: 90px
+          margin-top: 5px
+          font-family: "Open Sans"
+
+          .name
+            font-size: .79166em
+
+          .description
+            font-size: .70833em
+
+  .feedbacks
+    margin-top: 45px
+    width: 75%
+
+    .feedbacks-title
+      font-size: .70833em
+      font-family: "Open Sans"
+
+    .feedbacks-container
+      border: 1px solid black
+      margin-top: 5px
+
+      
+      .feedback
+        padding: 10px 40px
+        +clearfix
+        background-color: #fff
+        border-top: 1px solid black
+
+        &:first-child
+          border: 0
+
+        .logo
+          float: left
+
+          .logo-image
+            border-radius: 50%
+        
+        .text
+          margin-left: 90px
+          margin-top: 5px
+          font-family: "Open Sans"
+
+          .name
+            font-size: .79166em
+
+          .description
+            font-size: .70833em
+
+        .appreciation
+          float: right
+          font-size: .70833em
+
+          .heart
+            +size(1em)
+            position: relative
+            top: 3px
