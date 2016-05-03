@@ -66,7 +66,7 @@
         <filter class="solr.LowerCaseFilterFactory"/>
         <filter class="solr.PorterStemFilterFactory"/>
         <filter class="solr.ASCIIFoldingFilterFactory" preserveOriginal="true"/>
-        <filter class="solr.NGramFilterFactory" minGramSize="2" maxGramSize="20" />
+        <filter class="solr.NGramFilterFactory" minGramSize="1" maxGramSize="20" />
       </analyzer>
       <analyzer type="query">
         <tokenizer class="solr.StandardTokenizerFactory"/>

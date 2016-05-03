@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get "predictions", to: "api#predictions"
+
   get "search", to: "searches#search"
 
   get "discover", to: "misc#discover"
