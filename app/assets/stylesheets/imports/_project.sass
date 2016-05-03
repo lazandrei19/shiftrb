@@ -1,2 +1,232 @@
 .container > .project
-  background-color: #fff
+  margin: 25px auto
+  display: flex
+  flex-direction: column
+  align-items: center
+  max-width: 895px
+
+  .info
+    text-align: center
+    max-width: 59.21%
+
+    .name
+      font-size: 1.125em
+      margin-top: 10px
+
+    .headline
+      font-size: .70833em
+      font-family: "Open Sans"
+      margin-top: 5px
+  
+  .description
+    margin-top: 30px
+    font-size: .70833em
+    width: 100%
+
+    .description-content
+      background-color: white
+      border: 1px solid black
+      padding: 10px 20px
+      
+      .complete
+        display: none
+
+        p
+          margin: 0
+
+      .more
+        text-align: center
+        font-family: "Open Sans"
+
+  .members
+    width: 100%
+    margin-top: 25px
+
+    .members-headline
+      font-size: .70833em
+
+    .members-content
+      display: flex
+      flex-wrap: wrap
+      justify-content: space-around
+      margin-top: 5px
+
+      .member
+        width: 260px
+        height: 95px
+        border: 1px solid black
+        +clearfix
+        padding: 5px 0 5px 20px
+        background-color: white
+        margin-bottom: 10px
+
+        .profile-photo
+          float: left
+
+          .profile-image
+            border-radius: 50%
+
+        .text
+          font-family: "Open Sans"
+          margin-left: 95px
+
+          .name
+            font-size: .70833em
+
+          .workplace, .appreciation
+            font-size: .625em
+            color: #a8a8a8
+
+          .appreciation .heart
+            +size(1.133em)
+            position: relative
+            top: 3px
+
+        &.hidden
+          display: none
+
+    .more
+      text-align: center
+      font-size: .70833em
+
+  .feedback
+    width: 100%
+    margin-top: 20px
+    font-size: .70833em
+
+    .project-appreciation
+      float: right
+
+      .heart
+        +size(1em)
+        position: relative
+        top: 3px
+
+    .feedback-inputs
+      width: 100%
+      margin-top: 5px
+
+      .feedback-form
+        width: 100%
+        +clearfix
+
+        .feedback-input
+          width: 100%
+          height: 90px
+          padding: 10px 20px
+          box-sizing: border-box
+          transition: all .1s ease-in
+          border: 0
+          resize: none
+
+          &:focus
+            outline: 0
+            padding: 5px
+
+        .feedback-submit
+          float: right
+          background-color: #8cd3d3
+          color: white
+          border: 0
+          padding: 5px 15px
+
+        .markdown-indicator
+          float: left
+
+    .feedbacks
+      font-size: 1rem
+
+      .feedback-content
+        width: 100%
+        +clearfix
+        margin-top: 20px
+
+        .feedback-profile-photo
+          float: left
+          -webkit-user-select: none
+          -moz-user-select: none
+          -ms-user-select: none
+          user-select: none
+          
+          .feedback-profile-image
+            border-radius: 50%
+
+        .appreciation
+          font-size: .66em
+          float: right
+          -webkit-user-select: none
+          -moz-user-select: none
+          -ms-user-select: none
+          user-select: none
+
+          .heart
+            +size(.70833rem)
+            position: relative
+            top: 3px
+
+        .feedback-text
+          margin-left: 85px
+
+          .feedback-user
+            font-size: .79166em
+
+          .feedback-content-text
+            font-size: .70833em
+
+            p
+              margin: 0
+
+        .reply
+          float: right
+          cursor: pointer
+
+          .reply-icon
+            +size(30px 25px)
+
+      .replies
+        width: 100%
+        max-width: 790px
+        margin: 0 0 0 auto
+        font-size: 1rem
+        background-color: #f1f1f1
+
+        .reply-content
+          margin-top: 20px
+
+          &:first-child
+            margin-top: 5px
+
+          .reply-user
+            font-size: .79166em
+
+          .reply-text
+            font-size: .70833em
+
+            p
+              margin: 0
+
+        .reply-form
+          width: 100%
+          +clearfix
+          display: none
+          font-size: .70833em
+
+          .reply-form-input
+            width: 100%
+            height: 65px
+            border: 0
+            padding: 10px 20px
+            resize: none
+            box-sizing: border-box
+            transition: all .1s ease-in
+
+            &:focus
+              outline: 0
+              padding: 5px
+
+          .reply-form-submit
+            float: right
+            background-color: #8cd3d3
+            color: white
+            border: 0
+            padding: 5px 15px

@@ -41,8 +41,7 @@ class ProjectsController < ApplicationController
 
     if @project.save
       @project.create_activity :create, owner: current_user
-      
-      members[:members].each_line do |member|
+      members[:members].chomp.split(/\n/).reject(&:empty?).uniq.each do |member|
         @project.members.create(:user => User.find_by_hashed_id(/\/users\/(\w{16})/.match(member)[1]))
       end
       

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   after_create :generate_hashed_id
   validates_uniqueness_of :hashed_id
+  before_save :set_default
 
   searchable do
     text :name
@@ -40,5 +41,9 @@ class User < ActiveRecord::Base
 
   def generate_hashed_id
     self.update_attributes(:hashed_id => Digest::SHA1.hexdigest("--#{MY_SALT}--#{self.id}--")[0..15])
+  end
+
+  def set_default
+    self.appreciation = 0 unless self.appreciation
   end
 end

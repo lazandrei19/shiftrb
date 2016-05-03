@@ -1,14 +1,10 @@
  ☐ testing
  ☐ slug
  ☐ add fb integration
-<<<<<<< Updated upstream
  ☐ add carousel of photos (https://github.com/acrogenesis/owlcarousel-rails)
- ✔ add team to projects
-=======
  ☐ reporting
  ☐ Accepting feedback
- ☐ Adding members to team
->>>>>>> Stashed changes
+ ✔ add team to projects
  ✔ search @done (16-04-26 10:39)
  ✔ feedback replies @done (16-04-19 18:14)
  ✔ notification system @done (16-04-19 17:11)

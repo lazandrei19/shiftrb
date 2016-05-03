@@ -1,34 +1,96 @@
 <div class="project">
   <div class="info">
     <div class="logo">
-      <%= image_tag @project.logo.url(:medium), :class => "logo-image" %>
+      <%= image_tag(@project.logo.url(:medium), :class => "logo-image")%>
     </div>
     <div class="name"><%= @project.name %></div>
     <div class="headline"><%= @project.headline %></div>
   </div>
-  <div class="description"><%= @project.description %></div>
-  <div class="members">
-    <% @project.members.each do |member| %>
-      <%= member.user.name %>
-      <br>
-    <% end %>
+  <div class="description">
+    <div class="description-headline">Product:</div>
+    <div class="description-content">
+      <% if strip_tags(md_render(@project.description)).length > 140 %>
+        <span class="first140">
+          <%= truncate(strip_tags(md_render(@project.description)), length: 140, omission: '', separator: ' ') %>
+        </span>
+        <span class="complete">
+          <%= md_render @project.description %>
+        </span>
+        <div class="more">
+          <%= link_to "+ More", "#", :class => "more-link" %>
+        </div>
+      <% elsif strip_tags(md_render(@project.description)).length <= 140 && @project.images.length > 0 %>
+        <span class="first140">
+          <%= strip_tags(md_render(@project.description)) %>
+        </span>
+        <div class="more">
+          <%= link_to "+ More", "#", :class => "more-link" %>
+        </div>
+      <% else %>
+        <span class="first140">
+          <%= strip_tags(md_render(@project.description)) %>
+        </span>
+      <% end %>
+    </div>
   </div>
-  <div class="image-carousel">
+  <div class="members">
+    <div class="members-headline">Team:</div>
+    <div class="members-content">
+      <% @project.members.each_with_index do |member, index| %>
+        <div class="member <%= index < 3 ? "not-hidden" : "hidden" %>">
+          <div class="profile-photo">
+            <%= image_tag(member.user.avatar.url(:thumb), :class => "profile-image") %>
+          </div>
+          <div class="text">
+            <div class="name"><%= member.user.name %></div>
+            <div class="workplace">
+              <span class="company"><%= member.user.workplaces[0].company %></span>
+              -
+              <span class="position"><%= member.user.workplaces[0].position %></span>
+            </div>
+            <div class="appreciation">
+              <%= member.user.appreciation || 0 %>
+              <%= render "icons/heart" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if @project.members.length > 3 %>
+        <div class="more">
+          <%= link_to "+ More", "#", :class => "more-link" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <!--<div class="image-carousel">
     <% @project.images.each do |image| %>
       <div class="carousel-image-contaier">
-        <%= image_tag image.image.url(:original), :class => "carousel-image" %>
+        <%= image_tag(image.image.url(:original), :class => "carousel-image") %>
       </div>
     <% end %>
+  </div> -->
+  <div class="feedback">
+    <div class="project-appreciation">
+      <%= link_to like_project_path, :method => :put do %>
+        <%= render "icons/heart_like", like: (current_user.voted_for? @project) %>
+      <% end %>
+      <%= pluralize(@project.votes_for.size, "person") %>
+      <%= like_or_likes(@project.votes_for.size) %>
+      it. Do you?
+    </div>
+    <div class="feedback-headline">
+      What others have said about
+      <%= @project.name %>:
+    </div>
+    <div class="feedback-inputs">
+      <%= simple_form_for [@project, Feedback.new], :html=> { class: "feedback-form" } do |f| %>
+        <%= f.input :content, placeholder: "How can you help #{@project.name} and their team?", required: false, label: false, input_html: { class: "feedback-input" } %>
+        <%= image_tag("/images/markdown.png", :class => "markdown-indicator") %>
+        <%= f.button :submit, "Submit", class: "feedback-submit" %>
+      <% end %>
+    </div>
+    <div class="feedbacks">
+      <%= render @project.feedbacks %>
+    </div>
   </div>
-  <%= simple_form_for [@project, Feedback.new] do |f| %>
-    <%= f.error_notification %>
-
-    <div class="form-inputs">
-      <%= f.input :content, label: "Give feedback" %>
-    </div>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Submit" %>
-    </div>
-  <% end %>
 </div>

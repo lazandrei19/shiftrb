@@ -1,5 +1,4 @@
-<div class="col-xs-12 feedback">
-  <h4><%= image_tag(reply.user.avatar.url(:thumb)) %><%= link_to reply.user.name, reply.user %></h4>
-  <%= md_render reply.content %>
-  <br>
+<div class="reply-content">
+  <div class="reply-user"><%= reply.user.name %></div>
+  <div class="reply-text"><%= md_render reply.content %></div>
 </div>

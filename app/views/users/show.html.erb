@@ -1,7 +1,7 @@
 <div class="user">
   <div class="info">
     <div class="profile-picture">
-      <%= image_tag @user.avatar.url(:medium), :class => "profile-image" %>
+      <%= image_tag(@user.avatar.url(:medium), :class => "profile-image") %>
     </div>
     <div class="text">
       <div class="name"><%= @user.name %></div>
@@ -42,7 +42,7 @@
         <% @user.projects.order("created_at DESC").each do |project| %>
           <div class="project">
             <div class="logo">
-              <%= image_tag project.logo.url(:thumb), :class => "logo-image" %>
+              <%= image_tag(project.logo.url(:thumb), :class => "logo-image") %>
             </div>
             <div class="text">
               <div class="name"><%= project.name %></div>
@@ -63,7 +63,7 @@
         <% @user.feedbacks.order("created_at DESC").each do |feedback| %>
           <div class="feedback">
             <div class="logo">
-              <%= image_tag feedback.project.logo.url(:thumb), :class => "logo-image" %>
+              <%= image_tag(feedback.project.logo.url(:thumb), :class => "logo-image") %>
             </div>
             <div class="appreciation">
               <%= render "icons/heart" %>
