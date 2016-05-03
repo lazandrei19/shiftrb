@@ -27,6 +27,54 @@
       background-color: white
       border: 1px solid black
       padding: 10px 20px
+
+      .carousel
+        display: none
+
+        .image-carousel
+          position: relative
+          height: 300px
+          
+          .arrow
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+            cursor: pointer
+
+            &.arrow-left
+              left: -1em
+
+            &.arrow-right
+              right: -1em
+
+          .carousel-images
+            display: flex
+            align-items: center
+            justify-content: center
+            height: 100%
+
+          .carousel-image-container
+            display: none
+
+            &.active
+              display: block
+              cursor: pointer
+
+            .carousel-image
+              max-height: 300px
+              max-width: 100%
+
+        .carousel-control
+          position: relative
+          display: flex
+          flex-wrap: wrap
+          justify-content: center
+
+          .carousel-control-image
+            padding: 5px
+
+          .carousel-control-image-container
+            cursor: pointer
       
       .complete
         display: none
@@ -230,3 +278,20 @@
             color: white
             border: 0
             padding: 5px 15px
+
+.lightbox
+  +position(fixed, 0 0 0 0)
+  display: none
+
+  .bg
+    +size(100%)
+    background-color: rgba(#000, 0.75)
+
+  .image-container
+    +size(100%)
+
+    .lightbox-image
+      +position(absolute, 50% nil nil 50%)
+      transform: translate(-50%, -50%)
+      max:
+        +size(95%)

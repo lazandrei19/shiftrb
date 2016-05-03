@@ -10,6 +10,28 @@
     <div class="description-headline">Product:</div>
     <div class="description-content">
       <% if strip_tags(md_render(@project.description)).length > 140 %>
+        <% if @project.images.length > 0 %>
+          <div class="carousel">
+            <div class="image-carousel">
+              <%= fa_icon "chevron-left", class: "arrow arrow-left" %>
+              <%= fa_icon "chevron-right", class: "arrow arrow-right" %>
+              <div class="carousel-images">
+                <% @project.images.each do |image| %>
+                  <div class="carousel-image-container">
+                    <%= image_tag(image.image.url(:original), :class => "carousel-image") %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="carousel-control">
+              <% @project.images.each do |image| %>
+                <div class="carousel-control-image-container">
+                  <%= image_tag(image.image.url(:thumb), :class => "carousel-control-image") %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
         <span class="first140">
           <%= truncate(strip_tags(md_render(@project.description)), length: 140, omission: '', separator: ' ') %>
         </span>
@@ -20,6 +42,26 @@
           <%= link_to "+ More", "#", :class => "more-link" %>
         </div>
       <% elsif strip_tags(md_render(@project.description)).length <= 140 && @project.images.length > 0 %>
+        <div class="carousel">
+          <div class="image-carousel">
+            <%= fa_icon "chevron-left", class: "arrow arrow-left" %>
+            <%= fa_icon "chevron-right", class: "arrow arrow-right" %>
+            <div class="carousel-images">
+              <% @project.images.each do |image| %>
+                <div class="carousel-image-container">
+                  <%= image_tag(image.image.url(:original), :class => "carousel-image") %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="carousel-control">
+            <% @project.images.each do |image| %>
+              <div class="carousel-control-image-container">
+                <%= image_tag(image.image.url(:thumb), :class => "carousel-control-image") %>
+              </div>
+            <% end %>
+          </div>
+        </div>
         <span class="first140">
           <%= strip_tags(md_render(@project.description)) %>
         </span>
@@ -62,13 +104,6 @@
       <% end %>
     </div>
   </div>
-  <!--<div class="image-carousel">
-    <% @project.images.each do |image| %>
-      <div class="carousel-image-contaier">
-        <%= image_tag(image.image.url(:original), :class => "carousel-image") %>
-      </div>
-    <% end %>
-  </div> -->
   <div class="feedback">
     <div class="project-appreciation">
       <%= link_to like_project_path, :method => :put do %>
@@ -92,5 +127,11 @@
     <div class="feedbacks">
       <%= render @project.feedbacks %>
     </div>
+  </div>
+</div>
+<div class="lightbox">
+  <div class="bg"></div>
+  <div class="image-container">
+    <img class="lightbox-image">
   </div>
 </div>
