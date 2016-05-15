@@ -1,4 +1,4 @@
 <div class="nested-fields">
-  <%= f.input :image %>
+  <%= f.input :image, input_html: { accept: "image/*" } %>
   <%= link_to_remove_association "remove image", f %>
 </div>

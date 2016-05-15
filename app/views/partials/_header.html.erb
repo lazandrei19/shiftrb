@@ -11,8 +11,8 @@
       <% end %>
     </div>
     <div class="person">
-      <%= render "icons/notification", :locals => { :unread => true } %>
-      <% if false %>
+      <%= render "icons/notification" %>
+      <% if first_time %>
         <%= render "dropdowns/notification_first_time" %>
       <% else %>
         <%= render "dropdowns/notification" %>

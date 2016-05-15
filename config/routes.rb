@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  resources :users, only: [:index, :show]  do
+  resources :users, only: [:show]  do
     member do
       put "follow", to: "users#follow"
     end
@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   get "discover", to: "misc#discover"
 
   get "notifications", to: "activities#notifications"
+
+  put "clearNotif", to: "misc#clear"
 end

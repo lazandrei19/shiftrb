@@ -1,5 +1,16 @@
-<h1>New Project</h1>
+<%= simple_form_for(@project, html: { multipart: true, class: "new-project-form" }) do |f| %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', projects_path %>
+  <%= f.input :name, label: "How is your project called?" %>
+  <%= f.input :headline, as: :text, label: "Present your project’s unique key selling phrase in 140 characters.", input_html: {maxlength: 140}%>
+  <%= f.input :logo, label: "Insert the logo of your project", input_html: { accept: "image/*" } %>
+  <%= f.input :description %>
+  <%= f.input :members, :as => :text, input_html: {value: "", cols: 80, rows: 4} %>
+  <h3>Images</h3>
+  <%= f.simple_fields_for :images do |image| %>
+    <%= render 'image_fields', f: image %>
+  <% end %>
+  <div>
+    <%= link_to_add_association 'add image', f, :images %>
+  </div>
+  <%= f.button :submit %>
+<% end %>

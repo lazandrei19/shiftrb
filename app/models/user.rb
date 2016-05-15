@@ -45,5 +45,6 @@ class User < ActiveRecord::Base
 
   def set_default
     self.appreciation = 0 unless self.appreciation
+    self.unread = 0 unless self.unread
   end
 end

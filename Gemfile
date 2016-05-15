@@ -45,7 +45,9 @@ gem 'sunspot_rails'
 gem 'sunspot_solr'
 
 gem 'bourbon'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
+
+gem 'lodash-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

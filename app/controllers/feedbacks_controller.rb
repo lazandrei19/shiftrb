@@ -14,6 +14,8 @@ class FeedbacksController < ApplicationController
     if @feedback.save
       @feedback.create_activity :create, owner: current_user, recipient: @feedback.project.user
       @feedback.create_activity :createNotification, owner: current_user, recipient: @feedback.project.user
+      @feedback.project.user.unread += 1
+      @feedback.project.user.save
       redirect_to @project
     else
       redirect_to @project
@@ -26,11 +28,15 @@ class FeedbacksController < ApplicationController
       @feedback.create_activity :likeNotification, owner: current_user, recipient: @feedback.user
       @feedback.user.appreciation += 1
       @feedback.user.save
+      @feedback.user.unread += 1
+      @feedback.user.save
     else
-      @activity = PublicActivity::Activity.find_by(trackable_id: (@feedback.id), key: "feedback.likeNotification")
+      @activity = PublicActivity::Activity.find_by(trackable_id: (@feedback.id), key: "feedback.likeNotification", recipient_id: (@feedback.user.id))
       @activity.destroy
       @feedback.unliked_by current_user
       @feedback.user.appreciation -= 1
+      @feedback.user.save
+      @feedback.user.unread -= 1
       @feedback.user.save
     end
     redirect_to :back

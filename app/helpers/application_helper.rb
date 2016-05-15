@@ -7,4 +7,20 @@ module ApplicationHelper
   def like_or_likes(count)
     count == 1 ? "likes" : "like"
   end
+
+  def unread
+    current_user.unread > 0
+  end
+
+  def first_time
+    if session[:first_time]
+      true
+    elsif cookies[:first_time]
+      false
+    else
+      cookies[:first_time] = true
+      session[:first_time] = true
+      true
+    end
+  end
 end

@@ -127,6 +127,8 @@ GEM
     listen (3.0.6)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9.7)
+    lodash-rails (4.11.2)
+      railties (>= 3.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.10)
@@ -302,6 +304,7 @@ DEPENDENCIES
   guard-rspec (~> 4.6, >= 4.6.5)
   jbuilder (~> 2.0)
   jquery-rails
+  lodash-rails
   paperclip (~> 4.3, >= 4.3.6)
   public_activity (~> 1.4, >= 1.4.2)
   rails (= 4.2.6)

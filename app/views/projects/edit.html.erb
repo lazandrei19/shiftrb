@@ -1,6 +1,21 @@
-<h1>Editing Project</h1>
+<%= simple_form_for(@project, html: { multipart: true, class: "new-project-form" }) do |f| %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+  <%= f.input :name, label: "How is your project called?" %>
+  <%= f.input :headline, as: :text %>
+  <%= f.input :logo %>
+  <%= f.input :description %>
+  <% members_paths = ''
+     @project.members.each do |member|
+       members_paths += request.base_url + user_path(member.user) + "\n"
+     end
+  %>
+  <%= f.input :members, :as => :text, input_html: {value: members_paths, cols: 80, rows: 4} %>
+  <h3>Images</h3>
+  <%= f.simple_fields_for :images do |image| %>
+    <%= render 'image_fields', f: image %>
+  <% end %>
+  <div>
+    <%= link_to_add_association 'add image', f, :images %>
+  </div>
+  <%= f.button :submit %>
+<% end %>

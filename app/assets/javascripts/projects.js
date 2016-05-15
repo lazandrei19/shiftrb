@@ -1,8 +1,4 @@
-//= require jquery
-//= require jquery_ujs
-//= require bootstrap-sprockets
 //= require turbolinks
-//= require cocoon
 /*global $*/
 $(() => {
   var $project = $(".container > .project");

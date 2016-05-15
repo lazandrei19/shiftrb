@@ -1,0 +1,46 @@
+<div class="notification-dropdown-content">
+  <div class="users">
+    <div class="users-header">
+      <%= render "icons/people" %>
+    </div>
+    <% @users.each do |user| %>
+      <div class="user">
+        <div class="avatar">
+          <%= image_tag(@user.avatar.url(:thumb), class: "avatar-image") %>
+          <div class="text">
+            <div class="name"><%= @user.name %></div>
+            <div class="description">
+              <div class="likes">
+                <%= @user.appreciation %>
+                <%= render "icons/heart" %>
+              </div>
+              <div class="workplace">
+                <%= @user.workplaces[0].company %>
+                -
+                <%= @user.workplaces[0].position %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="projects">
+    <div class="projects-header">
+      <%= render "icons/projects" %>
+    </div>
+    <% @projects.each do |project| %>
+      <div class="project">
+        <div class="logo">
+          <%= image_tag(@project.logo.url(:thumb), class: "logo-image") %>
+          <div class="text">
+            <div class="name"><%= @project.name %></div>
+            <div class="description">
+              <%= @project.headline %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

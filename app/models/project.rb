@@ -17,6 +17,8 @@ class Project < ActiveRecord::Base
   validates_presence_of :description
   validates_presence_of :user
 
+  validates_length_of :headline, :maximum => 140
+
   searchable do
     text :headline, :description, :name
   end

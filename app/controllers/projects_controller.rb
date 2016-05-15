@@ -1,16 +1,15 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :like]
+  before_action :set_project, only: [:show, :edit, :update, :like]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :authorized_user, only: [:edit, :update, :destroy]
-
-  def index
-    @projects = Project.all
-  end
 
   def like
     unless current_user.voted_for? @project
       @project.create_activity :like, owner: current_user, recipient: @project.user
       @project.create_activity :likeNotification, owner: current_user, recipient: @project.user
+
+      @project.user.unread += 1
+      @project.user.save
 
       @project.liked_by current_user
     else
@@ -18,6 +17,9 @@ class ProjectsController < ApplicationController
       @activityNotification = PublicActivity::Activity.find_by(trackable_id: (@project.id), key: "project.likeNotification")
       @activity.destroy
       @activityNotification.destroy
+
+      @project.user.unread -= 1
+      @project.user.save
 
       @project.unliked_by current_user
     end
