@@ -29,5 +29,9 @@ Rails.application.routes.draw do
 
   get "notifications", to: "activities#notifications"
 
-  put "clearNotif", to: "misc#clear"
+  scope "/misc" do
+    put "clearNotif", to: "misc#clearNotif"
+    get "clearFirstTime", to: "misc#clearFirstTime"
+  end
+
 end

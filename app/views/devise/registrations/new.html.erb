@@ -1,32 +1,39 @@
 <div class="user-registration">
   <h2 class="title">Register</h2>
 
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "user-registration-form" }) do |f| %>
-    <%= f.error_notification %>
-    <ul>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "user-registration-form" }, defaults: { label_html: { class: "user-form-label" }, input_html: { class: "user-form-input" }, wrapper_html: { class: "user-form-wrapper" }, error: false }) do |f| %>
+
+    <div class="multiple-inputs user-inputs">
+      <%= f.input :first_name, as: :fake, wrapper_html: { class: "wrapper-multiple" }, input_html: { class: "user-form-input first-name" } %>
+      <%= f.input :last_name, as: :fake, wrapper_html: { class: "wrapper-multiple" }, input_html: { class: "user-form-input last-name" } %>
+      <%= f.input :name, as: :hidden, input_html: { class: "user-form-input complete-name" } %>
+    </div>
+    <%= f.input :email %>
+    <%= f.input :avatar, input_html: { class: "input-avatar" }, wrapper_html: { class: "wrapper-avatar" } %>
+    <label class="fake-avatar-input" for="user_avatar">Upload Avatar</label>
+    <div class="multiple-inputs">
+      <%= f.input :password, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), wrapper_html: { class: "wrapper-multiple" } %>
+      <%= f.input :password_confirmation, wrapper_html: { class: "wrapper-multiple" } %>
+    </div>
+    <%= f.simple_fields_for :workplaces do |workplace| %>
+      <%= render 'workplace_fields', f: workplace %>
+    <% end %>
+    <div class="workplace-adder">
+      <%= link_to_add_association 'add workplace', f, :workplaces, :data => {:'cocoon-limit' => 3 } %>
+    </div>
+
+    <%= f.button :submit, "Sign up", class: "sign-up" %>
+
+    <ul class="errors">
       <% resource.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
-
-    <div class="form-inputs">
-      <%= f.input :first_name, as: :fake %>
-      <%= f.input :last_name, as: :fake %>
-      <%= f.input :name, as: :hidden %>
-      <%= f.input :email %>
-      <%= f.input :avatar %>
-      <%= f.input :password, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-      <%= f.input :password_confirmation %>
-      <%= f.simple_fields_for :workplaces do |workplace| %>
-        <%= render 'workplace_fields', f: workplace %>
-      <% end %>
-      <div>
-        <%= link_to_add_association 'add workplace', f, :workplaces %>
-      </div>
-    </div>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Sign up" %>
-    </div>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(() => {
+    $(".add_fields").click();
+  });
+</script>

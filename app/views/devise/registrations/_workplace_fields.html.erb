@@ -1,6 +1,5 @@
-<div class="nested-fields">
+<div class="multiple-inputs workplace-inputs">
   <%= f.input :company %>
   <%= f.input :position %>
-  <%= f.input :emoji %>
-  <%= link_to_remove_association "remove workplace", f %>
+  <%= link_to_remove_association "X", f, { wrapper_class: "workplace-inputs" } %>
 </div>

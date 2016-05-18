@@ -49,6 +49,10 @@ gem 'font-awesome-rails'
 
 gem 'lodash-rails'
 
+# Fixers
+gem 'jquery-turbolinks'
+gem 'cocoon_limiter'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

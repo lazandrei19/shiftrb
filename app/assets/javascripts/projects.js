@@ -1,4 +1,3 @@
-//= require turbolinks
 /*global $*/
 $(() => {
   var $project = $(".container > .project");
