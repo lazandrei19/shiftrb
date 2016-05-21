@@ -1,46 +1,60 @@
-<div class="notification-dropdown-content">
-  <div class="users">
-    <div class="users-header">
-      <%= render "icons/people" %>
-    </div>
-    <% @users.each do |user| %>
-      <div class="user">
-        <div class="avatar">
-          <%= image_tag(@user.avatar.url(:thumb), class: "avatar-image") %>
-          <div class="text">
-            <div class="name"><%= @user.name %></div>
-            <div class="description">
-              <div class="likes">
-                <%= @user.appreciation %>
-                <%= render "icons/heart" %>
-              </div>
-              <div class="workplace">
-                <%= @user.workplaces[0].company %>
-                -
-                <%= @user.workplaces[0].position %>
+<div class="search-dropdown-content">
+  <% if @users.length > 0 %>
+    <div class="users">
+      <div class="users-header">
+        <%#= render "icons/people" %>
+      </div>
+      <% @users.each_with_index do |user, i| %>
+        <% if i > 0 %>
+          <hr>
+        <% end %>
+        <%= link_to user, class: "search-link" do %>
+          <div class="user">
+            <div class="avatar">
+              <%= image_tag(user.avatar.url(:thumb), class: "avatar-image") %>
+            </div>
+            <div class="text">
+              <div class="name"><%= user.name %></div>
+              <div class="description">
+                <div class="likes">
+                  <%= user.appreciation %>
+                  <%= render "icons/heart" %>
+                </div>
+                <div class="workplace">
+                  <%= user.workplaces[0].company %>
+                  -
+                  <%= user.workplaces[0].position %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="projects">
-    <div class="projects-header">
-      <%= render "icons/projects" %>
+        <% end %>
+      <% end %>
     </div>
-    <% @projects.each do |project| %>
-      <div class="project">
-        <div class="logo">
-          <%= image_tag(@project.logo.url(:thumb), class: "logo-image") %>
-          <div class="text">
-            <div class="name"><%= @project.name %></div>
-            <div class="description">
-              <%= @project.headline %>
+  <% end %>
+  <% if @projects.length > 0 %>
+    <div class="projects">
+      <div class="projects-header">
+        <%#= render "icons/projects" %>
+      </div>
+      <% @projects.each_with_index do |project, i| %>
+        <% if i > 0 %>
+          <hr>
+        <% end %>
+        <%= link_to project, class: "search-link" do %>
+          <div class="project">
+            <div class="logo">
+              <%= image_tag(project.logo.url(:thumb), class: "logo-image") %>
+            </div>
+            <div class="text">
+              <div class="name"><%= project.name %></div>
+              <div class="description">
+                <%= project.headline %>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

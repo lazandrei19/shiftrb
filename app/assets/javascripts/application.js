@@ -12,6 +12,9 @@ $(() => {
   var $settingsDropdown = $person.find(".settings-dropdown");
   var $notificationIcon = $person.find(".notification-icon");
   var $notificationDropdown = $person.find(".notification-dropdown");
+  var $search = $(".search");
+  var $searchInput = $search.find(".search-input");
+  var $searchDropdown = $search.find(".search-dropdown");
   var $userRegistrationForm = $(".user-registration-form");
   var $avatarFileUpload = $userRegistrationForm.find(".input-avatar");
   var $avatarFakeFile = $userRegistrationForm.find(".fake-avatar-input");
@@ -42,6 +45,23 @@ $(() => {
   });
 
   $('.workplace-adder').cocoon_limiter();
+
+  $searchInput.focusin(() => {
+    $searchDropdown.show();
+  });
+
+  $searchInput.focusout(() => {
+    //$searchDropdown.hide();
+  });
+
+  $searchInput.keyup(() => {
+    $.ajax("/predictions/?q=" + $searchInput.val(), {
+      success: function(data) {
+        console.log(data);
+        $searchDropdown.html(data);
+      }
+    });
+  });
 });
 
 window.onbeforeunload = function(e) {

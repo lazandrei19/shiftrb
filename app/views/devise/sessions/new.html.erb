@@ -1,15 +1,26 @@
-<h2>Log in</h2>
+<div class="user-login">
+  <h2 class="title">Log in</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "user-login-form" }, defaults: { label_html: { class: "user-form-label" }, input_html: { class: "user-form-input" }, wrapper_html: { class: "user-form-wrapper" }, error: false }) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email, required: false, autofocus: true %>
+      <%= f.input :password, required: false %>
+      <div class="options">
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+        <%= f.button :submit, "Log in", class: "log-in" %>
+      </div>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
+    
+    <div class="form-links">
+      <%= render "devise/shared/links" %>
+    </div>
+    
+    <ul class="errors">
+      <% resource.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+</div>

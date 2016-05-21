@@ -15,5 +15,7 @@ class ApiController < ApplicationController
 
     @projects = projectSearch.results
     @users = userSearch.results
+
+    render layout: "empty"
   end
 end
