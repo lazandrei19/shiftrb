@@ -155,3 +155,4 @@ Temporary Items
 sftp-config.json
 
 development
+node_modules/
