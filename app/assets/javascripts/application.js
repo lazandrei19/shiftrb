@@ -43,6 +43,7 @@ $(() => {
   var $projectsSearchArea = $searchResults.find(".projects");
   var $searchMoreUsers = $usersSearchArea.find(".more-user");
   var $searchMoreProjects = $projectsSearchArea.find(".more-project");
+  var $discoverLikes = $(".discover .project .heart");
   var projectPage = 1;
   var userPage = 1;
 
@@ -76,6 +77,7 @@ $(() => {
   /*
    * Beggining of carousel control
    */
+  //TODO Fix whatever the hell broke in the carousel
   $carouselImages.eq(0).addClass("active");
   $carousel.children(".arrow-right").click(function() {
     var $active = $carouselImages.siblings().find(".active");
@@ -191,9 +193,9 @@ $(() => {
     });
   });
 
-  //TODO: Add likes from discovery. Temporary fix for links not being allowed inside links
+  $discoverLikes.click((e) => {
+    var $target = $(e.target);
+    console.log($target.parents("a").attr("href") + "like");
+    // $.ajax($target.parents("a").attr("href") + "like");
+  });
 });
-
-window.onbeforeunload = function(e) {
-  $.ajax("/misc/clearFirstTime");
-};

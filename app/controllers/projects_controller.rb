@@ -44,7 +44,12 @@ class ProjectsController < ApplicationController
     if @project.save
       @project.create_activity :create, owner: current_user
       members[:members].chomp.split(/\n/).reject(&:empty?).uniq.each do |member|
-        @project.members.create(:user => User.find_by_hashed_id(/\/users\/(\w{16})/.match(member)[1]))
+        user_hashed_id = /\/users\/(\w{16})/.match(member)[1]
+        user = User.find_by_hashed_id(user_hashed_id)
+        if user
+          member = user.members.create
+          @project.members << member
+        end
       end
       
       redirect_to @project, notice: 'Project was successfully created.'

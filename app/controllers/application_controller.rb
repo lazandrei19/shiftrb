@@ -5,6 +5,17 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def render *args
+    add_notifications
+    super
+  end
+
+  def add_notifications
+    if user_signed_in?
+      @notifications = PublicActivity::Activity.order("created_at desc").where(recipient: current_user, key: ["feedback.createNotification", "feedback.likeNotification", "project.createNotification", "project.likeNotification"]).limit(5)
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
