@@ -1,0 +1,25 @@
+<% if @users.length > 0 %>
+  <% @users.each do |user| %>
+    <%= link_to user, class: "search-link" do %>
+      <div class="user">
+        <div class="avatar">
+          <%= image_tag(user.avatar.url(:thumb), class: "avatar-image") %>
+        </div>
+        <div class="text">
+          <div class="name"><%= user.name %></div>
+          <div class="description">
+            <div class="likes">
+              <%= user.appreciation %>
+              <%= render "icons/heart" %>
+            </div>
+            <div class="workplace">
+              <%= user.workplaces[0].company %>
+              -
+              <%= user.workplaces[0].position %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

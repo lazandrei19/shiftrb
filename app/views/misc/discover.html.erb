@@ -1,0 +1,42 @@
+<div class="discover">
+  <% @projects.each do |project| %>
+    <%= link_to project, class: "discover-link" do %>
+      <div class="project">
+        <div class="logo">
+          <%= image_tag(project.logo.url(:thumb), class: "logo-image") %>
+        </div>
+        <div class="text">
+          <div class="name"><%= project.name %></div>
+          <div class="appreciation">
+              <%= project.votes_for.size %>
+              <%= render "icons/heart_like", like: (current_user.voted_for? project) %>
+          </div>
+          <div class="description">
+            <%= project.headline %>
+          </div>
+          <div class="members">
+            <% if project.members.length == 1 %>
+              <%= project.members[0].user.name %>
+              is team member of
+              <%= project.name %>
+            <% elsif project.members.length == 2 %>
+              <%= project.members[0].user.name %>
+              and
+              <%= project.members[1].user.name %>
+              are team members of
+              <%= project.name %>
+            <% else %>
+              <%= project.members[0].user.name %>
+              ,
+              <%= project.members[1].user.name %>
+              and
+              <%= pluralize(project.members.length - 2, "other") %>
+              are team members of
+              <%= project.name %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

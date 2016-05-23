@@ -1,10 +1,56 @@
-<h1>Search</h1>
-
-Searched for: <%= params[:q] %>
-
-<h1>Results:</h1>
-
-<br>
-
-<%= render @projects %>
-<%= render @users %>
+<div class="search-results">
+  <% if @users.length > 0 %>
+    <div class="users">
+      <div class="users-header"></div>
+      <% @users.each do |user| %>
+        <%= link_to user, class: "search-link" do %>
+          <div class="user">
+            <div class="avatar">
+              <%= image_tag(user.avatar.url(:thumb), class: "avatar-image") %>
+            </div>
+            <div class="text">
+              <div class="name"><%= user.name %></div>
+              <div class="description">
+                <div class="likes">
+                  <%= user.appreciation %>
+                  <%= render "icons/heart" %>
+                </div>
+                <div class="workplace">
+                  <%= user.workplaces[0].company %>
+                  -
+                  <%= user.workplaces[0].position %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="more">
+        <%= link_to "+More", "#", class: "more-user" %>
+      </div>
+    </div>
+  <% end %>
+  <% if @projects.length > 0 %>
+    <div class="projects">
+      <div class="projects-header"></div>
+      <% @projects.each do |project| %>
+        <%= link_to project, class: "search-link" do %>
+          <div class="project">
+            <div class="logo">
+              <%= image_tag(project.logo.url(:thumb), class: "logo-image") %>
+            </div>
+            <div class="text">
+              <div class="name"><%= project.name %></div>
+              <div class="description">
+                <%= project.headline %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="more">
+        <%= link_to "+More", "#", class: "more-project" %>
+      </div>
+    </div>
+  <% end %>
+</div>

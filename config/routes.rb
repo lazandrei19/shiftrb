@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   scope "/misc" do
     put "clearNotif", to: "misc#clearNotif"
     get "clearFirstTime", to: "misc#clearFirstTime"
+    get "moreProjects", to: "searches#moreProjects"
+    get "moreUsers", to: "searches#moreUsers"
   end
 
 end
