@@ -9,7 +9,7 @@
       <%= f.input :name, as: :hidden, input_html: { class: "user-form-input complete-name" } %>
     </div>
     <%= f.input :email %>
-    <%= f.input :avatar, input_html: { class: "input-avatar" }, wrapper_html: { class: "wrapper-avatar" } %>
+    <%= f.input :avatar, input_html: { class: "input-avatar", accept: "image/*" }, wrapper_html: { class: "wrapper-avatar" } %>
     <label class="fake-avatar-input" for="user_avatar">Upload Avatar</label>
     <div class="multiple-inputs">
       <%= f.input :password, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), wrapper_html: { class: "wrapper-multiple" } %>

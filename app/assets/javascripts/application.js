@@ -23,6 +23,9 @@ $(() => {
   var $lastName = $nameInputs.find(".last-name");
   var $completeName = $nameInputs.find(".complete-name");
   var $names = $nameInputs.children().not(".complete-name");
+  var $newProjectForm = $(".new-project-form");
+  var $logoFileUpload = $newProjectForm.find(".new-project-input-logo");
+  var $logoFakeFile = $newProjectForm.find(".fake-logo-input");
   var $project = $(".container > .project");
   var $lightbox = $project.siblings(".lightbox");
   var $lightboxImage = $lightbox.find(".lightbox-image");
@@ -32,7 +35,7 @@ $(() => {
   var $complete = $description.children(".complete");
   var $first140 = $description.children(".first140");
   var $carousel = $description.children(".carousel");
-  var $carouselImages = $carousel.find("carousel-image-container");
+  var $carouselImages = $carousel.find(".carousel-image-container");
   var $carouselControl = $carousel.children(".carousel-control");
   var $carouselControlImages = $carouselControl.children(".carousel-control-image-container");
   var $members = $project.children("members");
@@ -43,7 +46,6 @@ $(() => {
   var $projectsSearchArea = $searchResults.find(".projects");
   var $searchMoreUsers = $usersSearchArea.find(".more-user");
   var $searchMoreProjects = $projectsSearchArea.find(".more-project");
-  var $discoverLikes = $(".discover .project .heart");
   var projectPage = 1;
   var userPage = 1;
 
@@ -77,7 +79,6 @@ $(() => {
   /*
    * Beggining of carousel control
    */
-  //TODO Fix whatever the hell broke in the carousel
   $carouselImages.eq(0).addClass("active");
   $carousel.children(".arrow-right").click(function() {
     var $active = $carouselImages.siblings().find(".active");
@@ -131,6 +132,10 @@ $(() => {
 
   $avatarFileUpload.change(() => {
     $avatarFakeFile.text($avatarFileUpload.val().split('\\').pop());
+  });
+
+  $logoFileUpload.change(() => {
+    $logoFakeFile.text($logoFileUpload.val().split('\\').pop());
   });
 
   $('.workplace-adder').cocoon_limiter();
@@ -191,11 +196,5 @@ $(() => {
           $searchMoreUsers.parent().hide();
       }
     });
-  });
-
-  $discoverLikes.click((e) => {
-    var $target = $(e.target);
-    console.log($target.parents("a").attr("href") + "like");
-    // $.ajax($target.parents("a").attr("href") + "like");
   });
 });

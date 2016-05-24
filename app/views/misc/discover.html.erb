@@ -9,7 +9,7 @@
           <div class="name"><%= project.name %></div>
           <div class="appreciation">
               <%= project.votes_for.size %>
-              <%= render "icons/heart_like", like: (current_user.voted_for? project) %>
+              <%= render "icons/heart" %>
           </div>
           <div class="description">
             <%= project.headline %>
