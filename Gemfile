@@ -46,6 +46,7 @@ gem 'sunspot_solr'
 
 gem 'bourbon'
 gem 'font-awesome-rails'
+gem 'autoprefixer-rails'
 
 gem 'lodash-rails'
 

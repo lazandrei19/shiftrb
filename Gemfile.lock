@@ -296,6 +296,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_votable (~> 0.10.0)
+  autoprefixer-rails
   bootstrap-sass (~> 3.3.6)
   bourbon
   browserify-rails (~> 3.0)
